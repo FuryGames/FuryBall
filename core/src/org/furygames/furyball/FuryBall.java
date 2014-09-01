@@ -1,27 +1,21 @@
 package org.furygames.furyball;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.furygames.screens.EScreen;
+import org.furygames.screens.ScreenManager;
 
-public class FuryBall extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+import com.badlogic.gdx.Game;
+
+public class FuryBall extends Game {
+
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+		ScreenManager.getInstance().initialize(this);
+        ScreenManager.getInstance().show(EScreen.SPLASH);
 	}
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void dispose() {
+		super.dispose();
+        ScreenManager.getInstance().dispose();
 	}
 }

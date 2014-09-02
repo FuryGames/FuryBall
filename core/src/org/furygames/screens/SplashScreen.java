@@ -1,6 +1,5 @@
 package org.furygames.screens;
 
-
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
@@ -13,14 +12,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-
 public class SplashScreen extends GenericScreen {
 	
 	private TweenManager manager;
 	private SpriteBatch batcher;
 	private Sprite sprite;
 	private Texture  logoTexture;
-	
 	
 	public SplashScreen () {
 
@@ -43,27 +40,23 @@ public class SplashScreen extends GenericScreen {
 
 	@Override
 	public void show() {
+		logoTexture = new Texture(Gdx.files.internal("Fondo-logo2.png")); 
+		sprite = new Sprite(logoTexture );
+		sprite.setColor(1, 1, 1, 0);
+			
 		
-
-	logoTexture = new Texture(Gdx.files.internal("Fondo-logo2.png")); 
-	sprite = new Sprite(logoTexture );
-	sprite.setColor(1, 1, 1, 0);
+		float width = Gdx.graphics.getWidth();
+		float height = Gdx.graphics.getHeight();
 		
 	
-	float width = Gdx.graphics.getWidth();
-	float height = Gdx.graphics.getHeight();
-	
-
-	sprite.setSize(sprite.getWidth(), sprite.getHeight() );
-	sprite.setPosition((width / 2) - (sprite.getWidth() / 2), (height / 2)
-			- (sprite.getHeight() / 2));
-	
-	
-	setupTween();
-  	batcher = new SpriteBatch();
-	
-	
-}
+		sprite.setSize(sprite.getWidth(), sprite.getHeight() );
+		sprite.setPosition((width / 2) - (sprite.getWidth() / 2), (height / 2)
+				- (sprite.getHeight() / 2));
+		
+		
+		setupTween();
+	  	batcher = new SpriteBatch();
+	}
 
 	private void setupTween() {
 	   Tween.registerAccessor(Sprite.class, new SpriteAccessor());
@@ -76,11 +69,11 @@ public class SplashScreen extends GenericScreen {
 	       }
 	   };
 
-   Tween.to(sprite, SpriteAccessor.ALPHA, .8f).target(1)
+    Tween.to(sprite, SpriteAccessor.ALPHA, .8f).target(1)
            .ease(TweenEquations.easeInOutQuad).repeatYoyo(1, .7f)
            .setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE)
            .start(manager);
-}
+	}
 
 	@Override
 	public void hide() {

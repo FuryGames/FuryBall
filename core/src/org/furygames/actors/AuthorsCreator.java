@@ -12,7 +12,7 @@ public final class AuthorsCreator {
 
 	public static void Matias (World world) {
 		BodyDef bd = new BodyDef();
-		bd.position.set(MathUtils.random(0, 4), MathUtils.random(0, 2));
+		bd.position.set(MathUtils.random(2, 4), MathUtils.random(1, 2));
 		bd.type = BodyType.DynamicBody;
 		 
 		CircleShape shape = new CircleShape();
@@ -20,6 +20,9 @@ public final class AuthorsCreator {
 		 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
+		fixDef.friction = .75f;
+		fixDef.restitution = .5f;
+		fixDef.density = 5f;
 		 
 		Body oBody = world.createBody(bd);
 		oBody.createFixture(fixDef);

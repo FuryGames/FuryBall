@@ -34,7 +34,7 @@ public class CreditsScreen extends GenericScreen {
 		AuthorsCreator.Matias(world);
 		
 		// Crear Limites
-		createFloor(world);
+		createLimits(world);
 		
 		worldRender = new Box2DDebugRenderer();
 	}
@@ -48,20 +48,76 @@ public class CreditsScreen extends GenericScreen {
 		worldRender.render(world, camera.combined);
 	}
 	
-	private static void createFloor (World world) {
-		BodyDef bd = new BodyDef();
-		bd.position.set(0, .5f);
-		bd.type = BodyType.StaticBody;
+	private static void createLimits (World world) {
+		
+		final float SEPARATOR = .2f;
+		
+		// Bottom
+		//
+		
+		BodyDef bottom = new BodyDef();
+		bottom.type = BodyType.StaticBody;
 		 
 		EdgeShape shape = new EdgeShape();
-		shape.set(0, 0, SCREEN_WIDTH, 0);
+		shape.set(SEPARATOR, SEPARATOR, SCREEN_WIDTH - SEPARATOR, SEPARATOR);
 		 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
 		 
-		Body oBody = world.createBody(bd);
+		Body oBody = world.createBody(bottom);
 		oBody.createFixture(fixDef);
 		 
 		shape.dispose();
+		
+		// Up
+		//
+		
+		BodyDef up = new BodyDef();
+		up.type = BodyType.StaticBody;
+		 
+		EdgeShape shape2 = new EdgeShape();
+		shape2.set(SEPARATOR, SCREEN_HEIGHT - SEPARATOR , SCREEN_WIDTH - SEPARATOR, SCREEN_HEIGHT - SEPARATOR);
+		 
+		FixtureDef fixDef2 = new FixtureDef();
+		fixDef2.shape = shape2;
+		 
+		Body body = world.createBody(up);
+		body.createFixture(fixDef2);
+		 
+		shape2.dispose();
+		
+		// Left
+		//
+		
+		BodyDef left = new BodyDef();
+		left.type = BodyType.StaticBody;
+		 
+		EdgeShape leftShape = new EdgeShape();
+		shape2.set(SEPARATOR, SEPARATOR, SEPARATOR, SCREEN_HEIGHT - SEPARATOR);
+		 
+		FixtureDef leftFix = new FixtureDef();
+		leftFix.shape = leftShape;
+		 
+		Body leftBody = world.createBody(left);
+		leftBody.createFixture(leftFix);
+		 
+		leftShape.dispose();
+		
+		// Right
+		//
+		
+		BodyDef right = new BodyDef();
+		right.type = BodyType.StaticBody;
+		 
+		EdgeShape rightShape = new EdgeShape();
+		shape2.set(SCREEN_WIDTH - SEPARATOR, SEPARATOR, SCREEN_WIDTH - SEPARATOR, SCREEN_HEIGHT - SEPARATOR);
+		 
+		FixtureDef rightFix = new FixtureDef();
+		rightFix.shape = rightShape;
+		 
+		Body rightBody = world.createBody(right);
+		rightBody.createFixture(rightFix);
+		 
+		rightShape.dispose();
 	}
 }

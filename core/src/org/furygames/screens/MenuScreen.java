@@ -4,7 +4,7 @@ public class MenuScreen extends GenericScreen {
 
 	@Override
 	public void render(float delta) {
-		System.out.println("soy EnkiEA");
+		System.out.println("soy EnkiEA iniciando esta rama menuSplash");
 
 	}
 

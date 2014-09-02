@@ -1,5 +1,7 @@
 package org.furygames.screens;
 
+import org.furygames.timer.ScreenSwitchTask;
+
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
 
 public class SplashScreen extends GenericScreen {
 	
@@ -52,10 +55,11 @@ public class SplashScreen extends GenericScreen {
 		sprite.setSize(sprite.getWidth(), sprite.getHeight() );
 		sprite.setPosition((width / 2) - (sprite.getWidth() / 2), (height / 2)
 				- (sprite.getHeight() / 2));
-		
-		
+	
 		setupTween();
 	  	batcher = new SpriteBatch();
+	  	
+	  	Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 3f);
 	}
 
 	private void setupTween() {
@@ -69,7 +73,7 @@ public class SplashScreen extends GenericScreen {
 	       }
 	   };
 
-    Tween.to(sprite, SpriteAccessor.ALPHA, .8f).target(1)
+	   Tween.to(sprite, SpriteAccessor.ALPHA, .8f).target(1)
            .ease(TweenEquations.easeInOutQuad).repeatYoyo(1, .7f)
            .setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE)
            .start(manager);

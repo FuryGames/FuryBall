@@ -5,13 +5,18 @@ import org.furygames.actors.AuthorsCreator;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class CreditsScreen extends GenericScreen {
 
-	private final float SCREEN_WIDTH = 12.8f;
-	private final float SCREEN_HEIGHT = 7.2f;
+	private final static float SCREEN_WIDTH = 12.8f;
+	private final static float SCREEN_HEIGHT = 7.2f;
 	
 	private Vector2 gravity;
 	private World world;
@@ -29,7 +34,7 @@ public class CreditsScreen extends GenericScreen {
 		AuthorsCreator.Matias(world);
 		
 		// Crear Limites
-		
+		createFloor(world);
 		
 		worldRender = new Box2DDebugRenderer();
 	}
@@ -41,5 +46,22 @@ public class CreditsScreen extends GenericScreen {
 		world.step(delta, 8, 6);
 		camera.update();
 		worldRender.render(world, camera.combined);
+	}
+	
+	private static void createFloor (World world) {
+		BodyDef bd = new BodyDef();
+		bd.position.set(0, .5f);
+		bd.type = BodyType.StaticBody;
+		 
+		EdgeShape shape = new EdgeShape();
+		shape.set(0, 0, SCREEN_WIDTH, 0);
+		 
+		FixtureDef fixDef = new FixtureDef();
+		fixDef.shape = shape;
+		 
+		Body oBody = world.createBody(bd);
+		oBody.createFixture(fixDef);
+		 
+		shape.dispose();
 	}
 }

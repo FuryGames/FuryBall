@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Timer;
 
 public class SplashScreen extends GenericScreen {
 
-	
 	public SplashScreen () {
 
 	}
@@ -24,7 +23,7 @@ public class SplashScreen extends GenericScreen {
 	@Override
 	public void show() {
 		/* schedule to show main menu screen after 2 seconds */
-		Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 2f);
+		Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 3f);
 	}
 
 	@Override

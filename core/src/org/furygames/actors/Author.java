@@ -15,7 +15,7 @@ public class Author extends GenericAuthor implements Disposable {
 		ENKI
 	}
 	
-	public Author (int posX, int posY, World world, float size, EAuthors eAuthors) {
+	public Author (float posX, float posY, World world, float size, EAuthors eAuthors) {
 		super();
 		
 		switch (eAuthors) {

@@ -39,10 +39,6 @@ public class SplashScreen extends GenericScreen {
 	public void render(float delta) {
 		super.render(delta);
 		
-	
-		
-		
-		
 		manager.update(delta);
 		batcher.begin();
 		sprite.draw(batcher);
@@ -57,13 +53,8 @@ public class SplashScreen extends GenericScreen {
 	@Override
 	public void show() {
 		
-		
-		
-		
-       
 		sprite.setColor(1, 1, 1, 0);
 			
-		
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 		
@@ -74,7 +65,6 @@ public class SplashScreen extends GenericScreen {
 	
 		setupTween();
 	  	
-	 
 	
         Timer.schedule(new Task() {
             @Override

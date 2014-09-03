@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 
 public abstract class GenericScreen implements Screen {
 
-	public static final int WIDTH = 1280;
-	public static final int HEIGHT = 720;
+	public static final float WIDTH = 12.8f;
+	public static final float HEIGHT = 7.2f;
 	
 	protected Stage stage;
 	protected SpriteBatch batch;

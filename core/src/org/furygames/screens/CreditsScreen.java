@@ -1,7 +1,7 @@
 package org.furygames.screens;
 
-import org.furygames.actors.AuthorMatias;
-import org.furygames.actors.AuthorsCreator;
+import org.furygames.actors.Author;
+import org.furygames.actors.Author.EAuthors;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -17,32 +17,43 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 public class CreditsScreen extends GenericScreen {
-
-	private final static float SCREEN_WIDTH = 12.8f;
-	private final static float SCREEN_HEIGHT = 7.2f;
 	
-	private Body box;
 	private Box2DDebugRenderer debug;
 	private OrthographicCamera camera;
 	private World world;
 	private Array<Body> worldBodies;
 	private Vector2 gravity;
 	
-	private AuthorMatias matias;
-	//private AuthorMatias jrf;
+	private Array <Author> authors;
+	//private AuthorJuan jrf;
+	//private AuthorLuisCF enki;
+	
 	
 	public CreditsScreen () {
 		gravity = new Vector2 (MathUtils.random(-10f, 10f), MathUtils.random(-10f, 10f));
 		world = new World (gravity, true);
 		
-		camera = new OrthographicCamera(SCREEN_WIDTH, SCREEN_HEIGHT);
-		camera.position.set(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, 0);
+		camera = new OrthographicCamera(WIDTH, HEIGHT);
+		camera.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
 		
 		worldBodies = new Array <Body> ();
+		authors = new Array <Author> ();
 		
-		// Crear cuerpo de ejemplo
-		matias = new AuthorMatias(5, 5, world);
-		//jrf = new AuthorMatias(3, 3, world);
+		authors.add(new Author(MathUtils.random(1, 5),
+				MathUtils.random(1, 5), 
+				world, 
+				MathUtils.random(1f, 3f),
+				EAuthors.WRITKAS));
+		authors.add(new Author(MathUtils.random(1, 5),
+				MathUtils.random(1, 5), 
+				world, 
+				MathUtils.random(1f, 3f),
+				EAuthors.JRF));
+		authors.add(new Author(MathUtils.random(1, 5),
+				MathUtils.random(1, 5), 
+				world, 
+				MathUtils.random(1f, 3f),
+				EAuthors.ENKI));
 		
 		// Crear Limites
 		createLimits(world);
@@ -104,7 +115,7 @@ public class CreditsScreen extends GenericScreen {
 		bottom.type = BodyType.StaticBody;
 		 
 		EdgeShape shape = new EdgeShape();
-		shape.set(SEPARATOR, SEPARATOR, SCREEN_WIDTH - SEPARATOR, SEPARATOR);
+		shape.set(SEPARATOR, SEPARATOR, WIDTH - SEPARATOR, SEPARATOR);
 		 
 		FixtureDef fixDef = new FixtureDef();
 		fixDef.shape = shape;
@@ -121,7 +132,7 @@ public class CreditsScreen extends GenericScreen {
 		up.type = BodyType.StaticBody;
 		 
 		EdgeShape shape2 = new EdgeShape();
-		shape2.set(SEPARATOR, SCREEN_HEIGHT - SEPARATOR , SCREEN_WIDTH - SEPARATOR, SCREEN_HEIGHT - SEPARATOR);
+		shape2.set(SEPARATOR, HEIGHT - SEPARATOR , WIDTH - SEPARATOR, HEIGHT - SEPARATOR);
 		 
 		FixtureDef fixDef2 = new FixtureDef();
 		fixDef2.shape = shape2;
@@ -138,7 +149,7 @@ public class CreditsScreen extends GenericScreen {
 		left.type = BodyType.StaticBody;
 		 
 		EdgeShape leftShape = new EdgeShape();
-		shape2.set(SEPARATOR, SEPARATOR, SEPARATOR, SCREEN_HEIGHT - SEPARATOR);
+		shape2.set(SEPARATOR, SEPARATOR, SEPARATOR, HEIGHT - SEPARATOR);
 		 
 		FixtureDef leftFix = new FixtureDef();
 		leftFix.shape = leftShape;
@@ -155,7 +166,7 @@ public class CreditsScreen extends GenericScreen {
 		right.type = BodyType.StaticBody;
 		 
 		EdgeShape rightShape = new EdgeShape();
-		shape2.set(SCREEN_WIDTH - SEPARATOR, SEPARATOR, SCREEN_WIDTH - SEPARATOR, SCREEN_HEIGHT - SEPARATOR);
+		shape2.set(WIDTH - SEPARATOR, SEPARATOR, WIDTH - SEPARATOR, HEIGHT - SEPARATOR);
 		 
 		FixtureDef rightFix = new FixtureDef();
 		rightFix.shape = rightShape;

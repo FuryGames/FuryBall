@@ -1,19 +1,31 @@
 package org.furygames.actors;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public abstract class GenericAuthor {
-	protected Vector2 position;
-	protected float angle;
+
+	protected Sprite avatar;
+	protected Texture ttAvatar;
 	
-	public GenericAuthor (int posX, int posY) {
-		position = new Vector2(posX, posY);
-	}
+	protected Body body;
+	protected BodyDef bd;
+	protected CircleShape shape;
+	protected FixtureDef fixDef;
 	
-	protected void update (Body body) {
-		position.x = body.getPosition().x;
-		position.y = body.getPosition().y;
-		angle = (float) Math.toDegrees(body.getAngle());
+	public GenericAuthor () {
+		bd = new BodyDef();
+		shape = new CircleShape();
+		
+		fixDef = new FixtureDef();
+		fixDef.shape = shape;
+		fixDef.friction = MathUtils.random(.1f, .9f);
+		fixDef.restitution = MathUtils.random(.1f, .9f);
+		fixDef.density = MathUtils.random(.1f, 5f);
 	}
 }

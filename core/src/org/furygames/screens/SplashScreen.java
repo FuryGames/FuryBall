@@ -23,14 +23,17 @@ public class SplashScreen extends GenericScreen {
 	private Texture  logoTexture;
 	
 	public SplashScreen () {
+		logoTexture = new Texture(Gdx.files.internal("Fondo-logo2.png")); 
+		sprite = new Sprite(logoTexture );
+	  	batcher = new SpriteBatch();
 
 	}
 
 	@Override
 	public void render(float delta) {
+		super.render(delta);
+		
 		manager.update(delta);
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batcher.begin();
 		sprite.draw(batcher);
 		batcher.end();
@@ -43,8 +46,7 @@ public class SplashScreen extends GenericScreen {
 
 	@Override
 	public void show() {
-		logoTexture = new Texture(Gdx.files.internal("Fondo-logo2.png")); 
-		sprite = new Sprite(logoTexture );
+		
 		sprite.setColor(1, 1, 1, 0);
 			
 		
@@ -57,7 +59,6 @@ public class SplashScreen extends GenericScreen {
 				- (sprite.getHeight() / 2));
 	
 		setupTween();
-	  	batcher = new SpriteBatch();
 	  	
 	  	Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 3f);
 	}

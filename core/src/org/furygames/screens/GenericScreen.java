@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
-public class GenericScreen implements Screen {
+public abstract class GenericScreen implements Screen {
 
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;

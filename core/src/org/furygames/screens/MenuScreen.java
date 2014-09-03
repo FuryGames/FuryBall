@@ -20,7 +20,7 @@ public class MenuScreen extends GenericScreen {
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camara;
 	
-	private float speed = 500;
+	private float speed = 500000;
 	private Vector2 movimiento = new Vector2(0,0);
 	private Body cubo;
 	@Override
@@ -32,21 +32,22 @@ public class MenuScreen extends GenericScreen {
 		mundo.step(1/60f, 8, 3);
 		cubo.applyForceToCenter(movimiento, true);
 		
-		camara.position.set(cubo.getPosition().x,cubo.getPosition().y,0);
+		//camara.position.set(cubo.getPosition().x,cubo.getPosition().y,0);
+		camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
 		camara.update();
 		debugRenderer.render(mundo, camara.combined);		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		camara.viewportWidth = width/25;
-		camara.viewportHeight = height/25;
+		camara.viewportWidth = width;
+		camara.viewportHeight = height;
 		camara.update();
 	}
 
 	@Override
 	public void show() {
-		mundo = new World(new Vector2(0,-9.81f),true);
+		mundo = new World(new Vector2(0,20),true);
 		debugRenderer = new Box2DDebugRenderer();
 		camara = new OrthographicCamera(Gdx.graphics.getWidth()/25,Gdx.graphics.getHeight()/25);
 		
@@ -106,7 +107,7 @@ public class MenuScreen extends GenericScreen {
 		cuerpo.position.set(0,0);
 		
 		ChainShape FormaLinea = new ChainShape();
-		FormaLinea.createChain(new Vector2[] {new Vector2(-50,0),new Vector2(50,0)});
+		FormaLinea.createChain(new Vector2[] {new Vector2(0,10),new Vector2(1280,10)});
 		
 		propiedades.shape = FormaLinea;
 		mundo.createBody(cuerpo).createFixture(propiedades);
@@ -115,10 +116,10 @@ public class MenuScreen extends GenericScreen {
 		// Caja
 		
 		cuerpo.type = BodyType.DynamicBody;
-		cuerpo.position.set(2.25f,10);
+		cuerpo.position.set(20,11);
 		
 		PolygonShape FormaCuadrado = new PolygonShape();
-		FormaCuadrado.setAsBox(.5f, 1);
+		FormaCuadrado.setAsBox(5, 10);
 		
 		propiedades.shape = FormaCuadrado;
 		propiedades.friction = .75f;
@@ -129,7 +130,7 @@ public class MenuScreen extends GenericScreen {
 		cubo.createFixture(propiedades);
 		FormaCuadrado.dispose();
 		
-		cubo.applyAngularImpulse(.5f, true);
+		cubo.applyAngularImpulse(5, true);
 	}
 
 	@Override

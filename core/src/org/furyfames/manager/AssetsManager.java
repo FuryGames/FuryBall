@@ -1,18 +1,14 @@
-package org.furyfames.assets;
-
-import org.furygames.furyball.FuryBall;
+package org.furyfames.manager;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
-
-public class Manager {
+public class AssetsManager {
 	
 	public  AssetManager manager;
-
     
-    public Manager(){
+    public AssetsManager(){
     	manager = new AssetManager();
     }
     
@@ -22,8 +18,4 @@ public class Manager {
         manager.load("sounds/intro/Movie Theater Intro.mp3",Sound.class);
             
     }
-    
-    
-  
-    
 }

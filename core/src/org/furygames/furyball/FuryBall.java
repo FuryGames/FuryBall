@@ -1,6 +1,6 @@
 package org.furygames.furyball;
 
-import org.furyfames.assets.Manager;
+import org.furyfames.manager.AssetsManager;
 import org.furygames.screens.EScreen;
 import org.furygames.screens.ScreenManager;
 
@@ -11,12 +11,12 @@ import com.badlogic.gdx.Game;
 public class FuryBall extends Game {
 	
 	
-	public static final Manager assets = new Manager();
+	public static final AssetsManager assets = new AssetsManager();
 	
 	@Override
 	public void create() {
 		ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().show(EScreen.SPLASH);
+        ScreenManager.getInstance().show(EScreen.CREDITS);
 	}
 
 	@Override

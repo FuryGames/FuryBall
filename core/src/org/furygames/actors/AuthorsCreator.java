@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public final class AuthorsCreator {
 
-	public static void Matias (World world) {
+	public static Body Matias (World world) {
 		BodyDef bd = new BodyDef();
 		bd.position.set(MathUtils.random(2, 4), MathUtils.random(1, 2));
 		bd.type = BodyType.DynamicBody;
@@ -28,6 +28,8 @@ public final class AuthorsCreator {
 		 
 		Body oBody = world.createBody(bd);
 		oBody.createFixture(fixDef);
+		
+		return oBody;
 	}
 	
 	public static void Test (World world) {

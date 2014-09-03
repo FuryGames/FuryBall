@@ -3,6 +3,7 @@ package org.furygames.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
@@ -12,12 +13,14 @@ public abstract class GenericScreen implements Screen {
 	public static final int HEIGHT = 720;
 	
 	protected Stage stage;
+	protected SpriteBatch batch;
 	
 	private FillViewport viewport;
 	
 	public GenericScreen () {
 		viewport = new FillViewport(WIDTH, HEIGHT);
 		stage = new Stage (viewport);
+		batch = new SpriteBatch();
 	}
 	
 	@Override

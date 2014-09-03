@@ -32,6 +32,7 @@ public class CreditsScreen extends GenericScreen {
 		
 		// Crear cuerpo de ejemplo
 		AuthorsCreator.Matias(world);
+		AuthorsCreator.Test(world);
 		
 		// Crear Limites
 		createLimits(world);
@@ -120,4 +121,5 @@ public class CreditsScreen extends GenericScreen {
 		 
 		rightShape.dispose();
 	}
+
 }

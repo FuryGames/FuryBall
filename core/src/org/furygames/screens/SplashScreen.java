@@ -1,5 +1,7 @@
 package org.furygames.screens;
 
+
+import org.furygames.furyball.FuryBall;
 import org.furygames.timer.ScreenSwitchTask;
 
 import aurelienribon.tweenengine.BaseTween;
@@ -9,22 +11,26 @@ import aurelienribon.tweenengine.TweenEquations;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 public class SplashScreen extends GenericScreen {
 	
 	private TweenManager manager;
 	private SpriteBatch batcher;
 	private Sprite sprite;
-	private Texture  logoTexture;
 	
 	public SplashScreen () {
-		logoTexture = new Texture(Gdx.files.internal("Fondo-logo2.png")); 
-		sprite = new Sprite(logoTexture );
+		
+		
+		FuryBall.assets.cargarAssets();
+		FuryBall.assets.manager.finishLoading();
+		sprite = new Sprite(FuryBall.assets.manager.get("Fondo-logo2.png",Texture.class));
 	  	batcher = new SpriteBatch();
 
 	}
@@ -32,6 +38,10 @@ public class SplashScreen extends GenericScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		
+	
+		
+		
 		
 		manager.update(delta);
 		batcher.begin();
@@ -47,6 +57,10 @@ public class SplashScreen extends GenericScreen {
 	@Override
 	public void show() {
 		
+		
+		
+		
+       
 		sprite.setColor(1, 1, 1, 0);
 			
 		
@@ -60,9 +74,24 @@ public class SplashScreen extends GenericScreen {
 	
 		setupTween();
 	  	
-	  	Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 3f);
-	}
-
+	 
+	
+        Timer.schedule(new Task() {
+            @Override
+            public void run() {
+            	
+            	FuryBall.assets.manager.get("sounds/intro/Movie Theater Intro.mp3",Sound.class).stop();
+            	ScreenManager.getInstance().show(EScreen.MENU);
+            }
+        }, 3.0f);
+    
+        FuryBall.assets.manager.get("sounds/intro/Movie Theater Intro.mp3",Sound.class).play();
+    }
+	  	
+	  	
+	  	
+	  	
+	
 	private void setupTween() {
 	   Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 	   manager = new TweenManager();
@@ -80,6 +109,8 @@ public class SplashScreen extends GenericScreen {
            .start(manager);
 	}
 
+	
+	
 	@Override
 	public void hide() {
 		/* dispose intro screen because it won't be needed anymore */

@@ -1,4 +1,4 @@
-package org.furyfames.manager;
+package org.furygames.manager;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;

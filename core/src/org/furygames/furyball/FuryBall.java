@@ -1,6 +1,6 @@
 package org.furygames.furyball;
 
-import org.furyfames.manager.AssetsManager;
+import org.furygames.manager.AssetsManager;
 import org.furygames.screens.EScreen;
 import org.furygames.screens.ScreenManager;
 

@@ -46,9 +46,9 @@ public class Author extends GenericAuthor implements Disposable {
 		bd.type = BodyType.DynamicBody;
 		 
 		shape.setRadius(size / 2);
+		
 		body = world.createBody(bd);
 		body.createFixture(fixDef);
-		
 		body.setUserData(avatar);
 	}
 	

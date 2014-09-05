@@ -6,8 +6,6 @@ import org.furygames.screens.ScreenManager;
 
 import com.badlogic.gdx.Game;
 
-
-
 public class FuryBall extends Game {
 	
 	

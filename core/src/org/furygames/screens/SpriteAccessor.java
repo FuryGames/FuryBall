@@ -1,8 +1,9 @@
 package org.furygames.screens;
 
+import aurelienribon.tweenengine.TweenAccessor;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import aurelienribon.tweenengine.TweenAccessor;
 
 public class SpriteAccessor implements TweenAccessor<Sprite>{
 	

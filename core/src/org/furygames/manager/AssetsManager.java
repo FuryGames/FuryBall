@@ -13,7 +13,23 @@ public class AssetsManager {
     }
     
     public  void cargarAssets(){
+    	
+    	// Images
+    	//
+    	
         manager.load("backgrounds/splash.jpg", Texture.class);
+        // Menu Buttons
+        manager.load("buttons/start_button.png", Texture.class);
+        //manager.load("buttons/exit_button.png", Texture.class);
+        //manager.load("buttons/credits_button.png", Texture.class);
+        
+        // Musics
+        //
+        
         manager.load("sounds/music/Mauricio Vera - Ausencia.mp3", Music.class);
+        
+        // Sound
+        //
+        
     }
 }

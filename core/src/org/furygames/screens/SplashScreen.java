@@ -16,6 +16,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -30,7 +31,8 @@ public class SplashScreen extends GenericScreen {
 		FuryBall.assets.manager.finishLoading();
 		sprite = new Sprite(FuryBall.assets.manager.get("backgrounds/splash.jpg", Texture.class));
 	  	batcher = new SpriteBatch();
-
+	  	
+	  	
 	}
 
 	@Override
@@ -51,7 +53,7 @@ public class SplashScreen extends GenericScreen {
 	@Override
 	public void show() {
 		sprite.setColor(1, 1, 1, 0);
-			
+		
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 		

@@ -12,7 +12,8 @@ public class Author extends GenericAuthor implements Disposable {
 	public enum EAuthors {
 		WRITKAS,
 		JRF,
-		ENKI
+		ENKI,
+		GUITAURICIO
 	}
 	
 	public Author (float posX, float posY, World world, float size, EAuthors eAuthors) {
@@ -26,6 +27,9 @@ public class Author extends GenericAuthor implements Disposable {
 				ttAvatar = new Texture (Gdx.files.internal("actors/authors/alguien.png"));
 				break;
 			case ENKI:
+				ttAvatar = new Texture (Gdx.files.internal("actors/authors/alguien.png"));
+				break;
+			case GUITAURICIO:
 				ttAvatar = new Texture (Gdx.files.internal("actors/authors/alguien.png"));
 				break;
 		}

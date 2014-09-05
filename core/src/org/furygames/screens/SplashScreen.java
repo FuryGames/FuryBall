@@ -26,11 +26,9 @@ public class SplashScreen extends GenericScreen {
 	private Sprite sprite;
 	
 	public SplashScreen () {
-		
-		
 		FuryBall.assets.cargarAssets();
 		FuryBall.assets.manager.finishLoading();
-		sprite = new Sprite(FuryBall.assets.manager.get("Fondo-logo2.png",Texture.class));
+		sprite = new Sprite(FuryBall.assets.manager.get("backgrounds/splash.jpg", Texture.class));
 	  	batcher = new SpriteBatch();
 
 	}
@@ -52,7 +50,6 @@ public class SplashScreen extends GenericScreen {
 
 	@Override
 	public void show() {
-		
 		sprite.setColor(1, 1, 1, 0);
 			
 		float width = Gdx.graphics.getWidth();
@@ -69,18 +66,14 @@ public class SplashScreen extends GenericScreen {
         Timer.schedule(new Task() {
             @Override
             public void run() {
-            	
-            	FuryBall.assets.manager.get("sounds/intro/Movie Theater Intro.mp3",Sound.class).stop();
             	ScreenManager.getInstance().show(EScreen.MENU);
             }
-        }, 3.0f);
-    
-        FuryBall.assets.manager.get("sounds/intro/Movie Theater Intro.mp3",Sound.class).play();
+        }, 4.0f);
+        
+        Music music = FuryBall.assets.manager.get("sounds/music/Mauricio Vera - Ausencia.mp3", Music.class);
+        music.play();
+        music.setLooping(true);
     }
-	  	
-	  	
-	  	
-	  	
 	
 	private void setupTween() {
 	   Tween.registerAccessor(Sprite.class, new SpriteAccessor());
@@ -93,13 +86,11 @@ public class SplashScreen extends GenericScreen {
 	       }
 	   };
 
-	   Tween.to(sprite, SpriteAccessor.ALPHA, .8f).target(1)
-           .ease(TweenEquations.easeInOutQuad).repeatYoyo(1, .7f)
+	   Tween.to(sprite, SpriteAccessor.ALPHA, 1f).target(1)
+           .ease(TweenEquations.easeInOutQuad).repeatYoyo(1, 1f)
            .setCallback(cb).setCallbackTriggers(TweenCallback.COMPLETE)
            .start(manager);
 	}
-
-	
 	
 	@Override
 	public void hide() {

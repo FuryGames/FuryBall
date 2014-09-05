@@ -64,6 +64,11 @@ public class CreditsScreen extends GenericScreen {
 				world, 
 				MathUtils.random(1.5f, 3f),
 				EAuthors.ENKI));
+		authors.add(new Author(MathUtils.random(.5f, WIDTH - .5f),
+				MathUtils.random(.5f, HEIGHT - .5f), 
+				world, 
+				MathUtils.random(1.5f, 3f),
+				EAuthors.GUITAURICIO));
 		
 		// Crear Limites
 		Box2DCreator.createLimits(world);

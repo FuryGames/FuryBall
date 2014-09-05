@@ -1,7 +1,7 @@
 package org.furygames.manager;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 
 public class AssetsManager {
@@ -13,9 +13,7 @@ public class AssetsManager {
     }
     
     public  void cargarAssets(){
-       
-        manager.load("Fondo-logo2.png",Texture.class);
-        manager.load("sounds/intro/Movie Theater Intro.mp3",Sound.class);
-            
+        manager.load("backgrounds/splash.jpg", Texture.class);
+        manager.load("sounds/music/Mauricio Vera - Ausencia.mp3", Music.class);
     }
 }

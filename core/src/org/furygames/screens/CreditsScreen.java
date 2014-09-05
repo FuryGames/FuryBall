@@ -23,7 +23,6 @@ public class CreditsScreen extends GenericScreen {
 	private Array<Body> worldBodies;
 	private Vector2 gravity;
 	private Task task;
-	
 	private Array <Author> authors;
 	
 	public CreditsScreen () {

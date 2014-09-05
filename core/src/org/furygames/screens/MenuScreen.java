@@ -1,10 +1,13 @@
 package org.furygames.screens;
 
 import org.furygames.actors.Box2DCreator;
+import org.furygames.actors.StartButton;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -14,27 +17,55 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Array;
 
 public class MenuScreen extends GenericScreen {
 	private World mundo;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camara;
+	private Array<Body> worldBodies;
 	
 	private float speed = 500000;
 	private Vector2 movimiento = new Vector2(0,0);
 	private Body cubo;
+	
+	private StartButton startButton;
 	
 	@Override
 	public void render(float delta) {
 		super.render(delta);
 		
 		mundo.step(delta, 8, 6);
-		cubo.applyForceToCenter(movimiento, true);
-		
-		//camara.position.set(cubo.getPosition().x,cubo.getPosition().y,0);
-		//camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
+
 		camara.update();
-		debugRenderer.render(mundo, camara.combined);		
+		debugRenderer.render(mundo, camara.combined);
+		
+		batch.setProjectionMatrix(camara.combined);
+		batch.begin();
+		
+		mundo.getBodies(worldBodies);
+		
+		for (Body body : worldBodies) {
+			if (body.getUserData() instanceof Sprite) {
+				Sprite sprite = (Sprite) body.getUserData();
+
+				/*
+				 * Set body position equals to box position. We also need to
+				 * center it in the box (measures are relative to body center).
+				 */
+				Vector2 position = body.getPosition();
+				sprite.setPosition(position.x - sprite.getWidth() / 2,
+						position.y - sprite.getWidth() / 2);
+
+				/* Set sprite rotation equals to body rotation */
+				sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+
+				/* Draw the sprite on screen */
+				sprite.draw(batch);
+			}
+		}
+		
+		batch.end();
 	}
 
 	@Override
@@ -52,6 +83,8 @@ public class MenuScreen extends GenericScreen {
 		
 		camara = new OrthographicCamera(WIDTH, HEIGHT);
 		camara.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
+		
+		worldBodies = new Array <Body> ();
 		
 		Gdx.input.setInputProcessor(new MenuScreenInputController(){
 			public boolean keyDown(int keycode) {
@@ -84,57 +117,16 @@ public class MenuScreen extends GenericScreen {
 				return true;
 			}			
 		});
+
+		// Crear start button
 		
-		// pelota
-		
-		BodyDef cuerpo = new BodyDef();
-		cuerpo.type = BodyType.DynamicBody;
-		cuerpo.position.set(0,3);
-		
-		CircleShape circulo = new CircleShape();
-		circulo.setRadius(.25f);
-		
-		FixtureDef propiedades = new FixtureDef();
-		propiedades.density = 2.5f;
-		propiedades.friction = .25f;
-		propiedades.restitution = .75f;
-		propiedades.shape = circulo;
-		
-		mundo.createBody(cuerpo).createFixture(propiedades);
-		circulo.dispose();
-		
-		//linea
-		
-		/* cuerpo.type = BodyType.StaticBody;
-		cuerpo.position.set(0,0);
-		
-		ChainShape FormaLinea = new ChainShape();
-		FormaLinea.createChain(new Vector2[] {new Vector2(0,10),new Vector2(1280,10)});
-		
-		propiedades.shape = FormaLinea;
-		mundo.createBody(cuerpo).createFixture(propiedades);
-		FormaLinea.dispose();*/
+		startButton = new StartButton(mundo, 
+				MathUtils.random(.5f, WIDTH - .5f),
+				MathUtils.random(.5f, HEIGHT - .5f),
+				MathUtils.random(1f, 2.5f));
 		
 		Box2DCreator.createLimits(mundo);
-		
-		// Caja
-		
-		cuerpo.type = BodyType.DynamicBody;
-		cuerpo.position.set(20,11);
-		
-		PolygonShape FormaCuadrado = new PolygonShape();
-		FormaCuadrado.setAsBox(5, 10);
-		
-		propiedades.shape = FormaCuadrado;
-		propiedades.friction = .75f;
-		propiedades.restitution = .1f;
-		propiedades.density = 5;
-		
-		cubo = mundo.createBody(cuerpo);
-		cubo.createFixture(propiedades);
-		FormaCuadrado.dispose();
-		
-		cubo.applyAngularImpulse(5, true);
+	
 	}
 
 	@Override

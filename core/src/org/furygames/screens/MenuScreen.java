@@ -1,14 +1,14 @@
 package org.furygames.screens;
 
+import org.furygames.actors.Box2DCreator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -28,20 +28,20 @@ public class MenuScreen extends GenericScreen {
 	public void render(float delta) {
 		super.render(delta);
 		
-		mundo.step(1/60f, 8, 3);
+		mundo.step(delta, 8, 6);
 		cubo.applyForceToCenter(movimiento, true);
 		
 		//camara.position.set(cubo.getPosition().x,cubo.getPosition().y,0);
-		camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
+		//camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
 		camara.update();
 		debugRenderer.render(mundo, camara.combined);		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		camara.viewportWidth = width;
-		camara.viewportHeight = height;
-		camara.update();
+		//camara.viewportWidth = width;
+		//camara.viewportHeight = height;
+		//camara.update();
 		System.out.println("MenuScreen");
 	}
 
@@ -49,7 +49,9 @@ public class MenuScreen extends GenericScreen {
 	public void show() {
 		mundo = new World(new Vector2(0,20),true);
 		debugRenderer = new Box2DDebugRenderer();
-		camara = new OrthographicCamera(Gdx.graphics.getWidth()/25,Gdx.graphics.getHeight()/25);
+		
+		camara = new OrthographicCamera(WIDTH, HEIGHT);
+		camara.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
 		
 		Gdx.input.setInputProcessor(new MenuScreenInputController(){
 			public boolean keyDown(int keycode) {
@@ -103,7 +105,7 @@ public class MenuScreen extends GenericScreen {
 		
 		//linea
 		
-		cuerpo.type = BodyType.StaticBody;
+		/* cuerpo.type = BodyType.StaticBody;
 		cuerpo.position.set(0,0);
 		
 		ChainShape FormaLinea = new ChainShape();
@@ -111,7 +113,9 @@ public class MenuScreen extends GenericScreen {
 		
 		propiedades.shape = FormaLinea;
 		mundo.createBody(cuerpo).createFixture(propiedades);
-		FormaLinea.dispose();
+		FormaLinea.dispose();*/
+		
+		Box2DCreator.createLimits(mundo);
 		
 		// Caja
 		

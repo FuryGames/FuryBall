@@ -120,6 +120,9 @@ public class CreditsScreen extends GenericScreen {
 		// Cancela todas las tareas
 		task.cancel();
 		
+		world.dispose();
+		debug.dispose();
+		
 		super.dispose();
 	}
 }

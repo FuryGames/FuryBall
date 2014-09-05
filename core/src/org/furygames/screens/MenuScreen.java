@@ -121,12 +121,11 @@ public class MenuScreen extends GenericScreen {
 		// Crear start button
 		
 		startButton = new StartButton(mundo, 
-				MathUtils.random(.5f, WIDTH - .5f),
-				MathUtils.random(.5f, HEIGHT - .5f),
-				MathUtils.random(1f, 2.5f));
+				MathUtils.random(.5f, WIDTH - 3.5f),
+				MathUtils.random(.5f, HEIGHT - 3.5f),
+				MathUtils.random(2f, 3f));
 		
 		Box2DCreator.createLimits(mundo);
-	
 	}
 
 	@Override

@@ -5,34 +5,44 @@ import org.furygames.actors.StartButton;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 
-public class MenuScreen extends GenericScreen {
+import org.furygames.screens.BuoyancyController;
+import org.furygames.screens.Box2DFactory;
+public class MenuScreen extends GenericScreen implements ContactListener {
 	private World mundo;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camara;
 	private Array<Body> worldBodies;
 	
-	private float speed = 500000;
-	private Vector2 movimiento = new Vector2(0,0);
-	private Body cubo;
-	
 	private StartButton startButton;
+	
+	//--
+	private static final int MAX_SPAWNED_BODIES = 20;	
+	private BuoyancyController buoyancyController;
+	private int spawnedBodies;	
 	
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render(delta);
 		
 		mundo.step(delta, 8, 6);
@@ -66,23 +76,32 @@ public class MenuScreen extends GenericScreen {
 		}
 		
 		batch.end();
+		mundo.step(1/60f, 8, 6);
+		//cubo.applyForceToCenter(movimiento, true);
+		
+		//camara.position.set(cubo.getPosition().x,cubo.getPosition().y,0);
+		//camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
+		camara.update();
+		debugRenderer.render(mundo, camara.combined);	
+		
+		buoyancyController.step();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		//camara.viewportWidth = width;
 		//camara.viewportHeight = height;
-		//camara.update();
+		camara.update();
 		System.out.println("MenuScreen");
 	}
 
 	@Override
 	public void show() {
-		mundo = new World(new Vector2(0,20),true);
+		mundo = new World(new Vector2(0,-30),true);
 		debugRenderer = new Box2DDebugRenderer();
 		
-		camara = new OrthographicCamera(WIDTH, HEIGHT);
-		camara.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
+		camara = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camara.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 		
 		worldBodies = new Array <Body> ();
 		
@@ -90,17 +109,50 @@ public class MenuScreen extends GenericScreen {
 			public boolean keyDown(int keycode) {
 				switch(keycode) {
 					case Keys.W:
-						movimiento.y = speed;
+						
+						
+						if (spawnedBodies < MAX_SPAWNED_BODIES) {
+							spawnedBodies++;
+
+							/* Translate camera point to world point */
+							Vector3 unprojectedVector = new Vector3();
+							camara.unproject(unprojectedVector.set(500, 500, 0));
+
+							/* Create a new box */
+							if (Math.random() >= 0.5) {
+								Shape shape = Box2DFactory.createBoxShape(20, 20, new Vector2(0,
+										0), 0);
+								FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 0.5f,
+										0.5f, 0.5f, false);
+								Box2DFactory.createBody(mundo, BodyType.DynamicBody,
+										fixtureDef, new Vector2(unprojectedVector.x,
+												unprojectedVector.y));
+							} else {
+								/* Create a new triangle */
+								Shape shape = Box2DFactory.createTriangleShape(20, 20);
+								FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 0.5f,
+										0.5f, 0.5f, false);
+								Box2DFactory.createBody(mundo, BodyType.DynamicBody,
+										fixtureDef, new Vector2(unprojectedVector.x,
+												unprojectedVector.y));
+							}
+						}						
+						
+						camara.position.y += 5f;
+						//movimiento.y = speed;
 					break;
 					case Keys.A:
-						movimiento.x = -speed;						
+						//movimiento.x = -speed;	
+						camara.position.x -= 5f;
 					break;
 					case Keys.S:
-						movimiento.y = -speed;						
+						//movimiento.y = -speed;	
+						camara.position.y -= 5f;
 					break;
 					case Keys.D:
-						movimiento.x = speed;						
-					break;					
+						//movimiento.x = speed;	
+						camara.position.x += 5f;
+					break;
 				}
 				return true;
 			}
@@ -108,11 +160,11 @@ public class MenuScreen extends GenericScreen {
 				switch(keycode) {
 				case Keys.W:
 				case Keys.S:
-					movimiento.y = 0;						
+				//	movimiento.y = 0;						
 					break;
 				case Keys.A:
 				case Keys.D:
-					movimiento.x = 0;											
+					//movimiento.x = 0;											
 				}
 				return true;
 			}			
@@ -126,6 +178,19 @@ public class MenuScreen extends GenericScreen {
 				MathUtils.random(2f, 3f));
 		
 		Box2DCreator.createLimits(mundo);
+		
+		
+		//---------------------------------
+		//---------------------------------
+		//Box2DFactory.createWalls(mundo,50,50,2);	
+		
+		Shape shape = Box2DFactory.createBoxShape(((camara.viewportWidth/2)-10),(100), new Vector2((camara.viewportWidth/2)-10, 100), 0);		
+		
+		FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 5, 0.1f, 0,true);		
+		Body water = Box2DFactory.createBody(mundo, BodyType.StaticBody,fixtureDef, new Vector2(10,10));		
+		buoyancyController = new BuoyancyController(mundo, water.getFixtureList().first());	
+		mundo.setContactListener(this);
+
 	}
 
 	@Override
@@ -150,6 +215,49 @@ public class MenuScreen extends GenericScreen {
 	public void dispose() {
 		mundo.dispose();
 		debugRenderer.dispose();
+	}
+
+	@Override
+	public void beginContact(Contact contact) {
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+
+		if (fixtureA.isSensor()
+				&& fixtureB.getBody().getType() == BodyType.DynamicBody) {
+			buoyancyController.addBody(fixtureB);
+		} else if (fixtureB.isSensor()
+				&& fixtureA.getBody().getType() == BodyType.DynamicBody) {
+			buoyancyController.addBody(fixtureA);
+		}
+		
+	}
+
+	@Override
+	public void endContact(Contact contact) {
+		Fixture fixtureA = contact.getFixtureA();
+		Fixture fixtureB = contact.getFixtureB();
+
+		if (fixtureA.isSensor()
+				&& fixtureB.getBody().getType() == BodyType.DynamicBody) {
+			buoyancyController.removeBody(fixtureB);
+		} else if (fixtureB.isSensor()
+				&& fixtureA.getBody().getType() == BodyType.DynamicBody) {
+			if (fixtureA.getBody().getWorldCenter().y > -1) {
+				buoyancyController.removeBody(fixtureA);
+			}
+		}
+	}
+
+	@Override
+	public void preSolve(Contact contact, Manifold oldManifold) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

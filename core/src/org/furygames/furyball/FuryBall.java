@@ -16,7 +16,7 @@ public class FuryBall extends Game {
 	@Override
 	public void create() {
 		ScreenManager.getInstance().initialize(this);
-        ScreenManager.getInstance().show(EScreen.SPLASH);
+        ScreenManager.getInstance().show(EScreen.MENU);
 	}
 
 	@Override

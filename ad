@@ -1,0 +1,75 @@
+[33mcommit c956cc68d284bfe13f98809871426b855520a107[m
+Author: EnkiEA <lfcesar_1988@hotmail.com>
+Date:   Tue Sep 2 08:17:13 2014 +0000
+
+    Testeando Box2D
+
+[33mcommit 1bf7f0ccae4138cba4b96f3b8382934cf0600379[m
+Author: EnkiEA <lfcesar_1988@hotmail.com>
+Date:   Tue Sep 2 04:29:48 2014 +0000
+
+    iniciando el uso de esta rama
+
+[33mcommit a536f82e3ffd1e7a140fd1466e5e3f1721f9fb76[m
+Author: EnkiEA <lfcesar_1988@hotmail.com>
+Date:   Tue Sep 2 04:21:03 2014 +0000
+
+    Creando rama menuscreen
+
+[33mcommit 3824d259b49d7ff8ae13bd3ef944f85795e13add[m
+Merge: e5bbb4e 364810a
+Author: Matías Muñoz Espinoza <writkas2@gmail.com>
+Date:   Tue Sep 2 00:13:20 2014 -0400
+
+    Merge branch 'master' of https://github.com/FuryGames/FuryBall
+
+[33mcommit e5bbb4e0243c5d96ab236492132ee76430dec478[m
+Author: Matías Muñoz Espinoza <writkas2@gmail.com>
+Date:   Tue Sep 2 00:13:12 2014 -0400
+
+    cambios en creditScreen
+
+[33mcommit 364810a2a69c2372fad2aeece08a49f34dfc589f[m
+Author: EnkiEA <lfcesar_1988@hotmail.com>
+Date:   Tue Sep 2 04:09:51 2014 +0000
+
+    agregando dependencia Tween Enigme
+    
+    Universal Tween Enigme version 6.3.3 , usa este comando antes ->  gradlew --refresh-dependencies
+
+[33mcommit 106c2dad0dc0a8dcadc42172910f340c8c5c3ccb[m
+Merge: dfcb237 e2b99e5
+Author: Juan R Flores <citojems@hotmail.com>
+Date:   Mon Sep 1 22:14:16 2014 -0500
+
+    Merge branch 'master' of git://github.com/FuryGames/FuryBall
+
+[33mcommit dfcb2371dd0d55ef57d99e89ce8b0569f5b33187[m
+Author: Juan R Flores <citojems@hotmail.com>
+Date:   Mon Sep 1 21:51:06 2014 -0500
+
+    logo furygames
+
+[33mcommit e2b99e5f66602074beb34bcd98beed5e7c744419[m
+Author: Matías Muñoz Espinoza <writkas2@gmail.com>
+Date:   Mon Sep 1 22:27:56 2014 -0400
+
+    más screens
+
+[33mcommit fffa5a3ee677cc168688a9481cb1891ed3177ad4[m
+Author: Matías Muñoz Espinoza <writkas2@gmail.com>
+Date:   Mon Sep 1 18:42:42 2014 -0400
+
+    estructura de pantallas
+
+[33mcommit 81365cb8086890ccf9be5129f47c7b14c7acd4bf[m
+Author: Matías Muñoz Espinoza <writkas2@gmail.com>
+Date:   Mon Sep 1 15:43:53 2014 -0400
+
+    init commit
+
+[33mcommit b2ea9b2bc468495b43af4bf2f85df2b8ebb9842e[m
+Author: Matías Muñoz Espinoza <writkas2@gmail.com>
+Date:   Mon Sep 1 15:41:31 2014 -0400
+
+    Initial commit

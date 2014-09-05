@@ -27,15 +27,14 @@ import com.badlogic.gdx.utils.Array;
 import org.furygames.screens.BuoyancyController;
 import org.furygames.screens.Box2DFactory;
 public class MenuScreen extends GenericScreen implements ContactListener {
+	private static final int MAX_SPAWNED_BODIES = 20;	
+
 	private World mundo;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camara;
 	private Array<Body> worldBodies;
-	
 	private StartButton startButton;
 	
-	//--
-	private static final int MAX_SPAWNED_BODIES = 20;	
 	private BuoyancyController buoyancyController;
 	private int spawnedBodies;	
 	
@@ -46,8 +45,6 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		super.render(delta);
 		
 		mundo.step(delta, 8, 6);
-<<<<<<< HEAD
-=======
 
 		camara.update();
 		debugRenderer.render(mundo, camara.combined);
@@ -79,11 +76,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		
 		batch.end();
 		mundo.step(1/60f, 8, 6);
->>>>>>> 246e140e0cda43caa44d81f3c754e7c7d6928e63
-		//cubo.applyForceToCenter(movimiento, true);
 		
-		//camara.position.set(cubo.getPosition().x,cubo.getPosition().y,0);
-		//camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
 		camara.update();
 		debugRenderer.render(mundo, camara.combined);	
 		
@@ -92,21 +85,13 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 
 	@Override
 	public void resize(int width, int height) {
-<<<<<<< HEAD
-		//camara.viewportWidth = WIDTH*20;
-		//camara.viewportHeight = HEIGHT*20;
-		//camara.update();
-=======
-		//camara.viewportWidth = width;
-		//camara.viewportHeight = height;
 		camara.update();
->>>>>>> 246e140e0cda43caa44d81f3c754e7c7d6928e63
 		System.out.println("MenuScreen");
 	}
 
 	@Override
 	public void show() {
-		mundo = new World(new Vector2(0,-9),true);
+		mundo = new World(new Vector2(0,-1),true);
 		debugRenderer = new Box2DDebugRenderer();
 		
 		camara = new OrthographicCamera(WIDTH,HEIGHT);
@@ -119,7 +104,6 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 				switch(keycode) {
 					case Keys.W:
 						
-						
 						if (spawnedBodies < MAX_SPAWNED_BODIES) {
 							spawnedBodies++;
 
@@ -128,7 +112,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 							camara.unproject(unprojectedVector.set(-12f, -6f, 0));
 
 							/* Create a new box */
-							if (Math.random() >= 0.5) {
+							if (MathUtils.randomBoolean()) {
 								Shape shape = Box2DFactory.createBoxShape(0.2f, 0.2f, new Vector2(6f,-0.8f), 0);
 								FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 1,
 										0.5f, 0.5f, false);
@@ -145,20 +129,20 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 							}
 						}						
 						
-						camara.position.y += 5f;
+						camara.position.y += 3f;
 						//movimiento.y = speed;
 					break;
 					case Keys.A:
 						//movimiento.x = -speed;	
-						camara.position.x -= 5f;
+						camara.position.x -= 3f;
 					break;
 					case Keys.S:
 						//movimiento.y = -speed;	
-						camara.position.y -= 5f;
+						camara.position.y -= 3f;
 					break;
 					case Keys.D:
 						//movimiento.x = speed;	
-						camara.position.x += 5f;
+						camara.position.x += 3f;
 					break;
 				}
 				return true;
@@ -176,27 +160,17 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 				return true;
 			}			
 		});
-<<<<<<< HEAD
 		
-		Box2DFactory.createWalls(mundo,0.1f,0.1f,camara.viewportWidth-(0.2f),camara.viewportHeight-(0.2f));	
-=======
-
 		// Crear start button
 		
 		startButton = new StartButton(mundo, 
 				MathUtils.random(.5f, WIDTH - 3.5f),
 				MathUtils.random(.5f, HEIGHT - 3.5f),
-				MathUtils.random(2f, 3f));
+				MathUtils.random(1f, 1f));
 		
 		Box2DCreator.createLimits(mundo);
 		
-		
-		//---------------------------------
-		//---------------------------------
-		//Box2DFactory.createWalls(mundo,50,50,2);	
->>>>>>> 246e140e0cda43caa44d81f3c754e7c7d6928e63
-		
-		Shape shape = Box2DFactory.createBoxShape(((camara.viewportWidth/2)-0.1f),(0.8f), new Vector2((camara.viewportWidth/2)-(0.1f), 0.8f), 0);		
+		Shape shape = Box2DFactory.createBoxShape(WIDTH - 6.6f, HEIGHT / 3 - 1f, new Vector2((camara.viewportWidth/2)-(0.1f), 1.5f), 0);
 		
 		FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 5, 0.1f, 0,true);		
 		Body water = Box2DFactory.createBody(mundo, BodyType.StaticBody,fixtureDef, new Vector2(0.1f,0.1f));		
@@ -237,7 +211,9 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		if (fixtureA.isSensor()
 				&& fixtureB.getBody().getType() == BodyType.DynamicBody) {
 			buoyancyController.addBody(fixtureB);
-		} else if (fixtureB.isSensor()
+		} 
+		
+		else if (fixtureB.isSensor()
 				&& fixtureA.getBody().getType() == BodyType.DynamicBody) {
 			buoyancyController.addBody(fixtureA);
 		}
@@ -252,7 +228,9 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		if (fixtureA.isSensor()
 				&& fixtureB.getBody().getType() == BodyType.DynamicBody) {
 			buoyancyController.removeBody(fixtureB);
-		} else if (fixtureB.isSensor()
+		} 
+		
+		else if (fixtureB.isSensor()
 				&& fixtureA.getBody().getType() == BodyType.DynamicBody) {
 			if (fixtureA.getBody().getWorldCenter().y > -1) {
 				buoyancyController.removeBody(fixtureA);

@@ -22,7 +22,7 @@ public class StartButton extends GenericButton implements Disposable {
 		fixture.shape = circle;
 		fixture.friction = MathUtils.random(.1f, .9f);
 		fixture.restitution = MathUtils.random(.1f, .9f);
-		fixture.density = MathUtils.random(.1f, 5f);
+		fixture.density = MathUtils.random(.1f, .5f);
 		
 		//Texture startButton = FuryBall.assets.manager.get("buttons/start_button.png", Texture.class);
 		//ttButton = startButton;

@@ -45,11 +45,11 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render(delta);
 		
-		mundo.step(1/60f, 8, 6);
+		mundo.step(delta, 8, 6);
 		//cubo.applyForceToCenter(movimiento, true);
 		
 		//camara.position.set(cubo.getPosition().x,cubo.getPosition().y,0);
-		camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
+		//camara.position.set(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2,0);
 		camara.update();
 		debugRenderer.render(mundo, camara.combined);	
 		
@@ -58,19 +58,19 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 
 	@Override
 	public void resize(int width, int height) {
-		camara.viewportWidth = width;
-		camara.viewportHeight = height;
-		camara.update();
+		//camara.viewportWidth = WIDTH*20;
+		//camara.viewportHeight = HEIGHT*20;
+		//camara.update();
 		System.out.println("MenuScreen");
 	}
 
 	@Override
 	public void show() {
-		mundo = new World(new Vector2(0,-30),true);
+		mundo = new World(new Vector2(0,-9),true);
 		debugRenderer = new Box2DDebugRenderer();
 		
-		camara = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camara.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		camara = new OrthographicCamera(WIDTH,HEIGHT);
+		camara.position.set(WIDTH / 2, HEIGHT/ 2, 0);
 		
 		Gdx.input.setInputProcessor(new MenuScreenInputController(){
 			public boolean keyDown(int keycode) {
@@ -83,25 +83,23 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 
 							/* Translate camera point to world point */
 							Vector3 unprojectedVector = new Vector3();
-							camara.unproject(unprojectedVector.set(500, 500, 0));
+							camara.unproject(unprojectedVector.set(-12f, -6f, 0));
 
 							/* Create a new box */
 							if (Math.random() >= 0.5) {
-								Shape shape = Box2DFactory.createBoxShape(20, 20, new Vector2(0,
-										0), 0);
-								FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 0.5f,
+								Shape shape = Box2DFactory.createBoxShape(0.2f, 0.2f, new Vector2(6f,-0.8f), 0);
+								FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 1,
 										0.5f, 0.5f, false);
 								Box2DFactory.createBody(mundo, BodyType.DynamicBody,
 										fixtureDef, new Vector2(unprojectedVector.x,
 												unprojectedVector.y));
 							} else {
 								/* Create a new triangle */
-								Shape shape = Box2DFactory.createTriangleShape(20, 20);
-								FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 0.5f,
+								Shape shape = Box2DFactory.createTriangleShape(0.2f, 0.2f);
+								FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 1,
 										0.5f, 0.5f, false);
 								Box2DFactory.createBody(mundo, BodyType.DynamicBody,
-										fixtureDef, new Vector2(unprojectedVector.x,
-												unprojectedVector.y));
+										fixtureDef, new Vector2(unprojectedVector.x,unprojectedVector.y));
 							}
 						}						
 						
@@ -134,71 +132,12 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 			}			
 		});
 		
-		// pelota
+		Box2DFactory.createWalls(mundo,0.1f,0.1f,camara.viewportWidth-(0.2f),camara.viewportHeight-(0.2f));	
 		
-
-		
-		/*BodyDef cuerpo = new BodyDef();
-		cuerpo.type = BodyType.DynamicBody;
-		cuerpo.position.set(300,300);
-		
-		CircleShape circulo = new CircleShape();
-		circulo.setRadius(30);
-		
-		FixtureDef propiedades = new FixtureDef();
-		propiedades.density = 2.5f;
-		propiedades.friction = .25f;
-		propiedades.restitution = .75f;
-		propiedades.shape = circulo;
-		
-		mundo.createBody(cuerpo).createFixture(propiedades);
-		circulo.dispose();
-		*/
-		
-		
-		//linea
-		
-		/*cuerpo.type = BodyType.StaticBody;
-		cuerpo.position.set(0,0);
-		
-		ChainShape FormaLinea = new ChainShape();
-		FormaLinea.createChain(new Vector2[] {new Vector2(0,10),new Vector2(1280,10)});
-		
-		propiedades.shape = FormaLinea;
-		mundo.createBody(cuerpo).createFixture(propiedades);
-		FormaLinea.dispose();*/
-		
-		//Box2DCreator.createLimits(mundo);
-
-		
-		// Caja
-		
-	/*	cuerpo.type = BodyType.DynamicBody;
-		cuerpo.position.set(400,400);
-		
-		PolygonShape FormaCuadrado = new PolygonShape();
-		FormaCuadrado.setAsBox(25, 50);
-		
-		propiedades.shape = FormaCuadrado;
-		propiedades.friction = .75f;
-		propiedades.restitution = .1f;
-		propiedades.density = 5;
-		
-		cubo = mundo.createBody(cuerpo);
-		cubo.createFixture(propiedades);
-		FormaCuadrado.dispose();
-		
-		cubo.applyAngularImpulse(5, true);*/
-		
-		
-		//---------------------------------
-		//---------------------------------
-		//Box2DFactory.createWalls(mundo,50,50,2);	
-		
-		Shape shape = Box2DFactory.createBoxShape(((camara.viewportWidth/2)-10),(100), new Vector2((camara.viewportWidth/2)-10, 100), 0);		
+		Shape shape = Box2DFactory.createBoxShape(((camara.viewportWidth/2)-0.1f),(0.8f), new Vector2((camara.viewportWidth/2)-(0.1f), 0.8f), 0);		
 		
 		FixtureDef fixtureDef = Box2DFactory.createFixture(shape, 5, 0.1f, 0,true);		
-		Body water = Box2DFactory.createBody(mundo, BodyType.StaticBody,fixtureDef, new Vector2(10,10));		
+		Body water = Box2DFactory.createBody(mundo, BodyType.StaticBody,fixtureDef, new Vector2(0.1f,0.1f));		
 		buoyancyController = new BuoyancyController(mundo, water.getFixtureList().first());	
 		mundo.setContactListener(this);
 		

@@ -77,18 +77,16 @@ public class Box2DFactory {
 		return fixtureDef;
 	}
 
-	public static Body createWalls(World world, float viewportWidth,
-			float viewportHeight, float offset) {
-		float halfWidth = viewportWidth / 2 - offset;
-		float halfHeight = viewportHeight / 2 - offset;
-
-		Vector2[] vertices = new Vector2[] {
-				new Vector2(-halfWidth, -halfHeight),
-				new Vector2(halfWidth, -halfHeight),
-				new Vector2(halfWidth, halfHeight),
-				new Vector2(-halfWidth, halfHeight),
-				new Vector2(-halfWidth, -halfHeight) };
-		
+	//public static Body createWalls(World world, float viewportWidth,float viewportHeight, float offset) {
+	public static Body createWalls(World world, float positionx,float positiony,float width,float height) {		
+		//float halfWidth = viewportWidth / 2 - offset;
+		//float halfHeight = viewportHeight / 2 - offset;
+		Vector2[] vertices = new Vector2[] {			
+				new Vector2(positionx, positiony),
+				new Vector2(positionx+width, positiony),
+				new Vector2(positionx+width, positiony+height),
+				new Vector2(positionx, positiony+height),
+				new Vector2(positionx, positiony) };	
 		Shape shape = createChainShape(vertices);
 		FixtureDef fixtureDef = createFixture(shape, 1, 0.5f, 0, false);
 

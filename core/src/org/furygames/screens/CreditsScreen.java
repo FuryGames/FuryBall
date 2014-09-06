@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
 public class CreditsScreen extends GenericScreen {
@@ -34,6 +35,19 @@ public class CreditsScreen extends GenericScreen {
 				
 		worldBodies = new Array <Body> ();
 		authors = new Array <Author> ();
+		
+		// Crear tarea para que cambie la gravedad cada 3 segundos
+		task = new Task() {
+			@Override
+			public void run() {
+				gravity.x = MathUtils.random(-10f, 10f);
+				gravity.y = MathUtils.random(-10f, 10f);
+				world.setGravity(gravity);
+			};
+		};
+		
+		// Iniciar la tarea
+		Timer.schedule(task, 3f, 3f, 100);
 		
 		authors.add(new Author(MathUtils.random(.5f, WIDTH - .5f),
 				MathUtils.random(.5f, HEIGHT - .5f), 

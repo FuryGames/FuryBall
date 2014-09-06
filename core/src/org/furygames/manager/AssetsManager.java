@@ -22,6 +22,11 @@ public class AssetsManager {
         manager.load("buttons/start_button.png", Texture.class);
         manager.load("buttons/exit_button.png", Texture.class);
         manager.load("buttons/credits_button.png", Texture.class);
+        // Authors
+        manager.load("actors/authors/enki.png", Texture.class);
+        manager.load("actors/authors/writkas.png", Texture.class);
+        manager.load("actors/authors/jrf.png", Texture.class);
+        manager.load("actors/authors/alguien.png", Texture.class);
         
         // Musics
         //

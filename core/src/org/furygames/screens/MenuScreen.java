@@ -32,7 +32,7 @@ import org.furygames.timer.ScreenSwitchTask;
 public class MenuScreen extends GenericScreen implements ContactListener {
 	private static final int MAX_SPAWNED_BODIES = 20;	
 
-	private World mundo;
+	private static World mundo;
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camara;
 	private Array<Body> worldBodies;
@@ -277,7 +277,10 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         		&& touchPos.y < spStartButton.getY() + spStartButton.getHeight()
         		&& Gdx.input.justTouched()) {
         	
-        	System.out.println("startButton");
+        	startButton.getBody().applyLinearImpulse(
+        			new Vector2(MathUtils.random(-1f, 1f), 1),
+        			startButton.getBody().getWorldCenter(),
+    				true);
         }
         
         else if (touchPos.x > spCreditsButton.getX() 
@@ -286,6 +289,10 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         		&& touchPos.y < spCreditsButton.getY() + spCreditsButton.getHeight()
         		&& Gdx.input.justTouched()) {
         	
+        	creditsButton.getBody().applyLinearImpulse(
+        			new Vector2(MathUtils.random(-1f, 1f), 1),
+        			creditsButton.getBody().getWorldCenter(),
+    				true);
         	Timer.schedule(new ScreenSwitchTask(EScreen.CREDITS), 2f);
         }
         
@@ -295,7 +302,14 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         		&& touchPos.y < spExitButton.getY() + spExitButton.getHeight()
         		&& Gdx.input.justTouched()) {
         	
-        	System.out.println("exitButton");
+        	exitButton.getBody().applyLinearImpulse(
+        			new Vector2(MathUtils.random(-1f, 1f), 1),
+        			exitButton.getBody().getWorldCenter(),
+    				true);
         }
   	}
+	
+	private static void impulse() {
+		
+	}
 }

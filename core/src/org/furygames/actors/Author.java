@@ -1,7 +1,10 @@
 package org.furygames.actors;
 
+import org.furygames.furyball.FuryBall;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
@@ -21,16 +24,16 @@ public class Author extends GenericAuthor implements Disposable {
 		
 		switch (eAuthors) {
 			case WRITKAS:
-				ttAvatar = new Texture (Gdx.files.internal("actors/authors/writkas.png"));
+				ttAvatar = FuryBall.assets.manager.get("actors/authors/writkas.png", Texture.class);
 				break;
 			case JRF:
-				ttAvatar = new Texture (Gdx.files.internal("actors/authors/alguien.png"));
+				ttAvatar = FuryBall.assets.manager.get("actors/authors/enki.png", Texture.class);
 				break;
 			case ENKI:
-				ttAvatar = new Texture (Gdx.files.internal("actors/authors/alguien.png"));
+				ttAvatar = FuryBall.assets.manager.get("actors/authors/jrf.png", Texture.class);
 				break;
 			case GUITAURICIO:
-				ttAvatar = new Texture (Gdx.files.internal("actors/authors/alguien.png"));
+				ttAvatar = FuryBall.assets.manager.get("actors/authors/alguien.png", Texture.class);
 				break;
 		}
 		

@@ -28,7 +28,7 @@ public class CreditsScreen extends GenericScreen {
 	
 	public CreditsScreen () {
 		gravity = new Vector2 (MathUtils.random(-10f, 10f), MathUtils.random(-10f, 10f));
-		world = new World (gravity, true);
+		world = new World (gravity, false);
 		
 		camera = new OrthographicCamera(WIDTH, HEIGHT);
 		camera.position.set(WIDTH / 2f, HEIGHT / 2f, 0);

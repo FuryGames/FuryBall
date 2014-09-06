@@ -65,3 +65,4 @@ build/
 .directory
 /bin
 Thumbs.db
+/.nb-gradle/private/

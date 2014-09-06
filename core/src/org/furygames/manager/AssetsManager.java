@@ -20,8 +20,8 @@ public class AssetsManager {
         manager.load("backgrounds/splash.jpg", Texture.class);
         // Menu Buttons
         manager.load("buttons/start_button.png", Texture.class);
-        //manager.load("buttons/exit_button.png", Texture.class);
-        //manager.load("buttons/credits_button.png", Texture.class);
+        manager.load("buttons/exit_button.png", Texture.class);
+        manager.load("buttons/credits_button.png", Texture.class);
         
         // Musics
         //

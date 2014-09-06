@@ -1,15 +1,13 @@
 package org.furygames.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 
-public abstract class GenericScreen extends InputAdapter implements Screen {
+public abstract class GenericScreen implements Screen {
 
 	public static final float WIDTH = 12.8f;
 	public static final float HEIGHT = 7.2f;

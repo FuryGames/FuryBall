@@ -1,6 +1,7 @@
 package org.furygames.screens;
 
 import org.furygames.actors.Box2DCreator;
+import org.furygames.actors.CreditsButton;
 import org.furygames.actors.StartButton;
 
 import com.badlogic.gdx.Gdx;
@@ -37,14 +38,10 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 	private OrthographicCamera camara;
 	private Array<Body> worldBodies;
 	private StartButton startButton;
+	private CreditsButton creditsButton;
 	
 	private BuoyancyController buoyancyController;
 	private int spawnedBodies;	
-	
-	//private MouseJoint mouseJoint;
-	private MouseJointDef jointDef;
-	private Body ground;
-	//private Vector3 touchPosition;
 	
 	@Override
 	public void render(float delta) {
@@ -105,13 +102,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		camara = new OrthographicCamera(WIDTH,HEIGHT);
 		camara.position.set(WIDTH / 2, HEIGHT/ 2, 0);
 		
-		//touchPosition = new Vector3();
-		jointDef = new MouseJointDef ();
-		
 		worldBodies = new Array <Body> ();
-		
-		//Gdx.input.setInputProcessor(this);
-		//startButton.getBody().getPosition().x;
 		
 		Gdx.input.setInputProcessor(new MenuScreenInputController(){
 			public boolean keyDown(int keycode) {
@@ -180,7 +171,11 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		startButton = new StartButton(mundo, 
 				MathUtils.random(.5f, WIDTH - 3.5f),
 				MathUtils.random(.5f, HEIGHT - 3.5f),
-				MathUtils.random(1f, 1f));
+				MathUtils.random(1.5f, 3f));
+		creditsButton = new CreditsButton(mundo, 
+				MathUtils.random(.5f, WIDTH - 3.5f),
+				MathUtils.random(.5f, HEIGHT - 3.5f),
+				MathUtils.random(1.5f, 3f));
 		
 		Box2DCreator.createLimits(mundo);
 		
@@ -263,24 +258,6 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		
 	}
 	
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	
 	int count = 0;
 	
 	private void checkInput () {
@@ -294,8 +271,6 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         		&& touchPos.y < sprite.getY() + sprite.getHeight()
         		&& Gdx.input.justTouched()) {
         	
-        	//startButton.getBody().setActive(false);
-            //mundo.destroyBody(startButton.getBody());
         	System.out.println(count++);
         }
   	}

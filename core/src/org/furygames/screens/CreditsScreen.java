@@ -23,18 +23,19 @@ public class CreditsScreen extends GenericScreen {
 	private Array<Body> worldBodies;
 	private Vector2 gravity;
 	private Task task;
+
 	private Array <Author> authors;
 	
 	public CreditsScreen () {
 		gravity = new Vector2 (MathUtils.random(-10f, 10f), MathUtils.random(-10f, 10f));
-		world = new World (gravity, false);
+		world = new World (gravity, true);
 		
 		camera = new OrthographicCamera(WIDTH, HEIGHT);
 		camera.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
 				
 		worldBodies = new Array <Body> ();
 		authors = new Array <Author> ();
-
+		
 		// Crear tarea para que cambie la gravedad cada 3 segundos
 		task = new Task() {
 			@Override
@@ -108,10 +109,9 @@ public class CreditsScreen extends GenericScreen {
 		}
 		
 		batch.end();
-		
 		world.step(delta, 8, 6);
 	}
-	
+
 	@Override
 	public void dispose() {
 		System.out.println("Dispose CreditScreen");

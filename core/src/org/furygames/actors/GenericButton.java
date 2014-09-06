@@ -20,4 +20,12 @@ public abstract class GenericButton {
 		
 		fixture = new FixtureDef();
 	}
+	
+	public Body getBody () {
+		return body;
+	}
+	
+	public Sprite getSprite () {
+		return spButton;
+	}
 }

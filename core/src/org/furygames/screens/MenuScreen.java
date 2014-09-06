@@ -19,9 +19,12 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 
 import org.furygames.screens.BuoyancyController;
@@ -38,11 +41,16 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 	private BuoyancyController buoyancyController;
 	private int spawnedBodies;	
 	
+	//private MouseJoint mouseJoint;
+	private MouseJointDef jointDef;
+	private Body ground;
+	//private Vector3 touchPosition;
+	
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render(delta);
+		
+		checkInput();
 		
 		mundo.step(delta, 8, 6);
 
@@ -97,12 +105,18 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		camara = new OrthographicCamera(WIDTH,HEIGHT);
 		camara.position.set(WIDTH / 2, HEIGHT/ 2, 0);
 		
+		//touchPosition = new Vector3();
+		jointDef = new MouseJointDef ();
+		
 		worldBodies = new Array <Body> ();
+		
+		//Gdx.input.setInputProcessor(this);
+		//startButton.getBody().getPosition().x;
 		
 		Gdx.input.setInputProcessor(new MenuScreenInputController(){
 			public boolean keyDown(int keycode) {
 				switch(keycode) {
-					case Keys.W:
+					case Keys.CONTROL_LEFT:
 						
 						if (spawnedBodies < MAX_SPAWNED_BODIES) {
 							spawnedBodies++;
@@ -176,7 +190,6 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		Body water = Box2DFactory.createBody(mundo, BodyType.StaticBody,fixtureDef, new Vector2(0.1f,0.1f));		
 		buoyancyController = new BuoyancyController(mundo, water.getFixtureList().first());	
 		mundo.setContactListener(this);
-
 	}
 
 	@Override
@@ -249,5 +262,41 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	int count = 0;
+	
+	private void checkInput () {
+        Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+        camara.unproject(touchPos);
+        Sprite sprite = startButton.getSprite();
+        
+        if (touchPos.x > sprite.getX() 
+        		&& touchPos.x < sprite.getX() + sprite.getWidth() 
+        		&& touchPos.y > sprite.getY() 
+        		&& touchPos.y < sprite.getY() + sprite.getHeight()
+        		&& Gdx.input.justTouched()) {
+        	
+        	//startButton.getBody().setActive(false);
+            //mundo.destroyBody(startButton.getBody());
+        	System.out.println(count++);
+        }
+  	}
 }

@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
@@ -24,6 +27,7 @@ public class CreditsScreen extends GenericScreen {
 	private Vector2 gravity;
 	private Task task;
 	private Array <Author> authors;
+	private Vector3 touchPosition;
 	
 	public CreditsScreen () {
 		gravity = new Vector2 (MathUtils.random(-10f, 10f), MathUtils.random(-10f, 10f));
@@ -31,6 +35,8 @@ public class CreditsScreen extends GenericScreen {
 		
 		camera = new OrthographicCamera(WIDTH, HEIGHT);
 		camera.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
+		
+		touchPosition = new Vector3();
 		
 		worldBodies = new Array <Body> ();
 		authors = new Array <Author> ();
@@ -123,5 +129,11 @@ public class CreditsScreen extends GenericScreen {
 		debug.dispose();
 		
 		super.dispose();
+	}	
+	
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		System.out.println("touch");
+		return true;
 	}
 }

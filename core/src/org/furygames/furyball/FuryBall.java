@@ -8,7 +8,6 @@ import com.badlogic.gdx.Game;
 
 public class FuryBall extends Game {
 	
-	
 	public static final AssetsManager assets = new AssetsManager();
 	
 	@Override

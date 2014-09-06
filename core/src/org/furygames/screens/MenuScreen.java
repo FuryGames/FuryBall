@@ -52,7 +52,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 	public void render(float delta) {
 		super.render(delta);
 		
-		//checkInput();
+		checkInput();
 		
 		mundo.step(delta, 8, 6);
 

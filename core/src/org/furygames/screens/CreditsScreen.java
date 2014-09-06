@@ -12,8 +12,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.utils.Timer.Task;
 
 public class CreditsScreen extends GenericScreen {
 	
@@ -22,31 +20,22 @@ public class CreditsScreen extends GenericScreen {
 	private World world;
 	private Array<Body> worldBodies;
 	private Vector2 gravity;
+<<<<<<< HEAD
 	private Task task;
+=======
+	
+>>>>>>> parent of 0e24bef... cambios en creditsScreen
 	private Array <Author> authors;
 	
 	public CreditsScreen () {
 		gravity = new Vector2 (MathUtils.random(-10f, 10f), MathUtils.random(-10f, 10f));
-		world = new World (gravity, false);
+		world = new World (gravity, true);
 		
 		camera = new OrthographicCamera(WIDTH, HEIGHT);
 		camera.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
 				
 		worldBodies = new Array <Body> ();
 		authors = new Array <Author> ();
-
-		// Crear tarea para que cambie la gravedad cada 3 segundos
-		task = new Task() {
-			@Override
-			public void run() {
-				gravity.x = MathUtils.random(-10f, 10f);
-				gravity.y = MathUtils.random(-10f, 10f);
-				world.setGravity(gravity);
-			};
-		};
-		
-		// Iniciar la tarea
-		Timer.schedule(task, 3f, 3f, 100);
 		
 		authors.add(new Author(MathUtils.random(.5f, WIDTH - .5f),
 				MathUtils.random(.5f, HEIGHT - .5f), 
@@ -108,9 +97,9 @@ public class CreditsScreen extends GenericScreen {
 		}
 		
 		batch.end();
-		
 		world.step(delta, 8, 6);
 	}
+<<<<<<< HEAD
 	
 	@Override
 	public void dispose() {
@@ -124,4 +113,6 @@ public class CreditsScreen extends GenericScreen {
 		
 		super.dispose();
 	}
+=======
+>>>>>>> parent of 0e24bef... cambios en creditsScreen
 }

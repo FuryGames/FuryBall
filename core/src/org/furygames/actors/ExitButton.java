@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Disposable;
 public class ExitButton extends GenericButton implements Disposable {
 	private PolygonShape triangle;
 	
-	public ExitButton (World world, float posX, float posY, float size) {
+	public ExitButton (World world, float posX, float posY, float halfWidth, float halfHeight) {
 		super();
 		
 		triangle = new PolygonShape();
@@ -27,16 +27,18 @@ public class ExitButton extends GenericButton implements Disposable {
 		Texture exitButton = FuryBall.assets.manager.get("buttons/exit_button.png", Texture.class);
 		ttButton = exitButton;
 		spButton = new Sprite(ttButton);
-		spButton.setSize(size, size);
+		spButton.setSize(halfWidth, halfHeight);
 		spButton.setOrigin(spButton.getWidth() / 2, spButton.getHeight() / 2);
 		
 		bd.position.set(posX, posY);
 		bd.type = BodyType.DynamicBody;
 
-		//triangle.setAsBox(size / 2, size / 2);
-		triangle.set(new Vector2[] { new Vector2(-size, -size),
-				new Vector2(0, size),
-				new Vector2(size, -size) });
+		halfWidth /= 2;
+		halfHeight /= 2;
+		
+		triangle.set(new Vector2[] { new Vector2(-halfWidth, -halfHeight),
+				new Vector2(0, halfHeight),
+				new Vector2(halfWidth, -halfHeight) });
 		
 		body = world.createBody(bd);
 		body.createFixture(fixture);

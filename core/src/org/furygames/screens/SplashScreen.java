@@ -2,7 +2,6 @@ package org.furygames.screens;
 
 
 import org.furygames.furyball.FuryBall;
-import org.furygames.timer.ScreenSwitchTask;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
@@ -12,11 +11,9 @@ import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
@@ -30,9 +27,7 @@ public class SplashScreen extends GenericScreen {
 		FuryBall.assets.cargarAssets();
 		FuryBall.assets.manager.finishLoading();
 		sprite = new Sprite(FuryBall.assets.manager.get("backgrounds/splash.jpg", Texture.class));
-	  	batcher = new SpriteBatch();
-	  	
-	  	
+	  	batcher = new SpriteBatch(); 	
 	}
 
 	@Override

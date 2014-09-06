@@ -2,6 +2,7 @@ package org.furygames.screens;
 
 import org.furygames.actors.Box2DCreator;
 import org.furygames.actors.CreditsButton;
+import org.furygames.actors.ExitButton;
 import org.furygames.actors.StartButton;
 
 import com.badlogic.gdx.Gdx;
@@ -27,9 +28,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 
 import org.furygames.screens.BuoyancyController;
 import org.furygames.screens.Box2DFactory;
+import org.furygames.timer.ScreenSwitchTask;
 public class MenuScreen extends GenericScreen implements ContactListener {
 	private static final int MAX_SPAWNED_BODIES = 20;	
 
@@ -37,8 +40,10 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 	private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camara;
 	private Array<Body> worldBodies;
+	
 	private StartButton startButton;
 	private CreditsButton creditsButton;
+	private ExitButton exitButton;
 	
 	private BuoyancyController buoyancyController;
 	private int spawnedBodies;	
@@ -169,13 +174,17 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		// Crear start button
 		
 		startButton = new StartButton(mundo, 
-				MathUtils.random(.5f, WIDTH - 3.5f),
-				MathUtils.random(.5f, HEIGHT - 3.5f),
+				MathUtils.random(.5f, WIDTH - .5f),
+				MathUtils.random(.5f, HEIGHT - .5f),
 				MathUtils.random(1.5f, 3f));
 		creditsButton = new CreditsButton(mundo, 
-				MathUtils.random(.5f, WIDTH - 3.5f),
-				MathUtils.random(.5f, HEIGHT - 3.5f),
+				MathUtils.random(.5f, WIDTH - .5f),
+				MathUtils.random(.5f, HEIGHT - .5f),
 				MathUtils.random(1.5f, 3f));
+		exitButton = new ExitButton (mundo,
+				MathUtils.random(.5f, WIDTH - .5f),
+				MathUtils.random(.5f, HEIGHT - .5f),
+				2.5f, 2.5f);
 		
 		Box2DCreator.createLimits(mundo);
 		
@@ -257,21 +266,40 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	int count = 0;
-	
+		
 	private void checkInput () {
         Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         camara.unproject(touchPos);
-        Sprite sprite = startButton.getSprite();
         
-        if (touchPos.x > sprite.getX() 
-        		&& touchPos.x < sprite.getX() + sprite.getWidth() 
-        		&& touchPos.y > sprite.getY() 
-        		&& touchPos.y < sprite.getY() + sprite.getHeight()
+        Sprite spStartButton = startButton.getSprite();
+        Sprite spCreditsButton = creditsButton.getSprite();
+        Sprite spExitButton = exitButton.getSprite();
+        
+        if (touchPos.x > spStartButton.getX() 
+        		&& touchPos.x < spStartButton.getX() + spStartButton.getWidth() 
+        		&& touchPos.y > spStartButton.getY() 
+        		&& touchPos.y < spStartButton.getY() + spStartButton.getHeight()
         		&& Gdx.input.justTouched()) {
         	
-        	System.out.println(count++);
+        	System.out.println("startButton");
+        }
+        
+        else if (touchPos.x > spCreditsButton.getX() 
+        		&& touchPos.x < spCreditsButton.getX() + spCreditsButton.getWidth() 
+        		&& touchPos.y > spCreditsButton.getY() 
+        		&& touchPos.y < spCreditsButton.getY() + spCreditsButton.getHeight()
+        		&& Gdx.input.justTouched()) {
+        	
+        	Timer.schedule(new ScreenSwitchTask(EScreen.CREDITS), 2f);
+        }
+        
+        else if (touchPos.x > spExitButton.getX() 
+        		&& touchPos.x < spExitButton.getX() + spExitButton.getWidth() 
+        		&& touchPos.y > spExitButton.getY() 
+        		&& touchPos.y < spExitButton.getY() + spExitButton.getHeight()
+        		&& Gdx.input.justTouched()) {
+        	
+        	System.out.println("exitButton");
         }
   	}
 }

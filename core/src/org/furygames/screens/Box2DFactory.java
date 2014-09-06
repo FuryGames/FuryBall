@@ -93,6 +93,4 @@ public class Box2DFactory {
 		return createBody(world, BodyType.StaticBody, fixtureDef, new Vector2(
 				0, 0));
 	}
-
-	// S
 }

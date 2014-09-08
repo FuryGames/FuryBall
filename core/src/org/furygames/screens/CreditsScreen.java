@@ -3,7 +3,10 @@ package org.furygames.screens;
 import org.furygames.actors.Author;
 import org.furygames.actors.Author.EAuthors;
 import org.furygames.actors.Box2DCreator;
+import org.furygames.timer.ScreenSwitchTask;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -85,6 +88,8 @@ public class CreditsScreen extends GenericScreen {
 	public void render(float delta) {
 		super.render(delta);
 		
+		checkInput();
+		
 		camera.update();
 		debug.render(world, camera.combined);
 		
@@ -128,5 +133,12 @@ public class CreditsScreen extends GenericScreen {
 		debug.dispose();
 		
 		super.dispose();
+	}
+	
+	public void checkInput () {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			Timer.schedule(new ScreenSwitchTask(EScreen.CREDITS), 1f);
+			System.out.println("esc-");
+		}
 	}
 }

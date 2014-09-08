@@ -264,6 +264,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 	}
 		
 	private void checkInput () {
+		
         Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         camara.unproject(touchPos);
         
@@ -311,8 +312,4 @@ public class MenuScreen extends GenericScreen implements ContactListener {
     				true);
         }
   	}
-	
-	private static void impulse() {
-		
-	}
 }

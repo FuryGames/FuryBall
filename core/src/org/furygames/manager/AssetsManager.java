@@ -27,6 +27,7 @@ public class AssetsManager {
         manager.load("actors/authors/writkas.png", Texture.class);
         manager.load("actors/authors/jrf.png", Texture.class);
         manager.load("actors/authors/alguien.png", Texture.class);
+        manager.load("actors/authors/danirod.png", Texture.class);
         
         // Musics
         //

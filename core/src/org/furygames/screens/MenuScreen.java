@@ -281,6 +281,8 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         			new Vector2(MathUtils.random(-1f, 1f), 1),
         			startButton.getBody().getWorldCenter(),
     				true);
+        	
+        	Timer.schedule(new ScreenSwitchTask(EScreen.LEVELS), 1f);
         }
         
         else if (touchPos.x > spCreditsButton.getX() 
@@ -293,7 +295,8 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         			new Vector2(MathUtils.random(-1f, 1f), 1),
         			creditsButton.getBody().getWorldCenter(),
     				true);
-        	Timer.schedule(new ScreenSwitchTask(EScreen.CREDITS), 2f);
+        	
+        	Timer.schedule(new ScreenSwitchTask(EScreen.CREDITS), 1f);
         }
         
         else if (touchPos.x > spExitButton.getX() 

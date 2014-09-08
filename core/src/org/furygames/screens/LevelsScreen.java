@@ -12,7 +12,10 @@ public class LevelsScreen extends GenericScreen {
     private OrthographicCamera camera;
     private World world;
     private Box2DDebugRenderer debugRenderBox2D;
-    Body levelall,level1,level2;
+    Body levelall;
+    Body level_A1,level_A2,level_A3;
+    Body level_B1,level_B2,level_B3;
+    Body level_C1,level_C2,level_C3;
     public void render(float delta)
     {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -32,9 +35,37 @@ public class LevelsScreen extends GenericScreen {
         BodyDef bodydeflevel = new BodyDef();
         FixtureDef fixture = new FixtureDef();
 
-        levelall = setLevelall(levelall,bodydeflevel,fixture,5,5);
-        level1 = addlevel(level1,bodydeflevel,fixture,5,3);
-        adddistanciajoint(levelall,level1,3f);
+
+        levelall = setLevelall(levelall,bodydeflevel,fixture,6,7);
+
+        //Line A 2f
+        level_A1 = addlevel(level_A1,bodydeflevel,fixture,1.8f,5);
+        level_A2 = addlevel(level_A2,bodydeflevel,fixture,1.8f,3);
+        level_A3 = addlevel(level_A3,bodydeflevel,fixture,1.8f,2);
+
+        adddistanciajoint(levelall,level_A1,1.5f,true,-4);
+        adddistanciajoint(level_A1,level_A2,2.2f,false,0);
+        adddistanciajoint(level_A2,level_A3,2.2f,false,0);
+
+        //Line B 6f
+        level_B1 = addlevel(level_B1,bodydeflevel,fixture,6.2f,5);
+        level_B2 = addlevel(level_B2,bodydeflevel,fixture,6.2f,3);
+        level_B3 = addlevel(level_B3,bodydeflevel,fixture,6.2f,2);
+
+        adddistanciajoint(levelall,level_B1,1.5f,true,0);
+        adddistanciajoint(level_B1,level_B2,2.2f,false,0);
+        adddistanciajoint(level_B2,level_B3,2.2f,false,0);
+
+        //Line C 10f
+        level_C1 = addlevel(level_C1,bodydeflevel,fixture,9.8f,5);
+        level_C2 = addlevel(level_C2,bodydeflevel,fixture,9.8f,3);
+        level_C3 = addlevel(level_C3,bodydeflevel,fixture,9.8f,2);
+
+        adddistanciajoint(levelall,level_C1,1.5f,true,4);
+        adddistanciajoint(level_C1,level_C2,2.2f,false,0);
+        adddistanciajoint(level_C2,level_C3,2.2f,false,0);
+
+
 
     }
     public Body setLevelall(Body body, BodyDef bodydeflevel,FixtureDef fixture,float x, float y)
@@ -43,7 +74,7 @@ public class LevelsScreen extends GenericScreen {
         bodydeflevel.position.set(x,y);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(2f,0.2f);
+        shape.setAsBox(6f,0.02f);
 
 
         fixture.shape = shape;
@@ -58,7 +89,7 @@ public class LevelsScreen extends GenericScreen {
         bodydeflevel.position.set(x,y);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(0.3f,0.2f);
+        shape.setAsBox(1.6f,0.8f);
 
         fixture.shape = shape;
         fixture.density = 2.5f;
@@ -70,12 +101,16 @@ public class LevelsScreen extends GenericScreen {
         return body;
 
     }
-    public void adddistanciajoint(Body A, Body B,float distance)
+    public void adddistanciajoint(Body A, Body B,float distance,boolean first,float X)
     {
         DistanceJointDef distanceJointDef = new DistanceJointDef();
         distanceJointDef.bodyA = A;
         distanceJointDef.bodyB = B;
         distanceJointDef.length = distance;
+        if(first)
+        {
+            distanceJointDef.localAnchorA.set(X,0);
+        }
         world.createJoint(distanceJointDef);
     }
     public void hide()

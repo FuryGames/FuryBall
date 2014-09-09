@@ -1,16 +1,20 @@
 package org.furygames.screens;
 
+import org.furygames.levels.ELevels;
+import org.furygames.timer.ScreenSwitchTask;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
+import com.badlogic.gdx.utils.Timer;
 
 public class LevelsScreen extends GenericScreen {
     private OrthographicCamera camera;
@@ -22,14 +26,38 @@ public class LevelsScreen extends GenericScreen {
     Body level_B1,level_B2,level_B3;
     Body level_C1,level_C2,level_C3;
 
-    public void render(float delta)
-    {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    public void render(float delta) {
+        super.render(delta);
+        
         camera.update();
         debugRenderBox2D.render(world,camera.combined);
-        world.step(delta,8,3);
+        world.step(delta, 8, 3);
 
+        // Esto es solo por el momento
+        if (Gdx.input.isKeyJustPressed(Keys.NUM_1)) {
+        	GameScreen.eLevels = ELevels.LEVEL1;
+        	Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 0f);
+        }
+        
+        else if (Gdx.input.isKeyJustPressed(Keys.NUM_2)) {
+        	GameScreen.eLevels = ELevels.LEVEL2;
+        	Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 0f);
+        }
+        
+        else if (Gdx.input.isKeyJustPressed(Keys.NUM_3)) {
+        	GameScreen.eLevels = ELevels.LEVEL3;
+        	Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 0f);
+        }
+        
+        else if (Gdx.input.isKeyJustPressed(Keys.NUM_4)) {
+        	GameScreen.eLevels = ELevels.LEVEL4;
+        	Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 0f);
+        }
+        
+        else if (Gdx.input.isKeyJustPressed(Keys.NUM_5)) {
+        	GameScreen.eLevels = ELevels.LEVEL5;
+        	Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 0f);
+        }
     }
     
     public void show()
@@ -71,10 +99,8 @@ public class LevelsScreen extends GenericScreen {
         adddistanciajoint(levelall,level_C1,1.5f,true,4);
         adddistanciajoint(level_C1,level_C2,2.2f,false,0);
         adddistanciajoint(level_C2,level_C3,2.2f,false,0);
-
-
-
     }
+    
     public Body setLevelall(Body body, BodyDef bodydeflevel,FixtureDef fixture,float x, float y)
     {
         bodydeflevel.type = BodyType.StaticBody;

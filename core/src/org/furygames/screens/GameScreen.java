@@ -18,11 +18,11 @@ public class GameScreen extends GenericScreen {
 	private Array<Body> worldBodies;
 	private Vector2 gravity;
 	
+	public static boolean isLoaded = false;
+	public static boolean needsToBeCleaned = false;
 	public static ELevels eLevels;
 	
-	public GameScreen () {
-		
-	}
+	public GameScreen () {}
 	
 	@Override
 	public void show() {
@@ -52,24 +52,29 @@ public class GameScreen extends GenericScreen {
         debug.render(world, camera.combined);
         world.step(delta, 8, 3);
 		
-		switch (eLevels) {
-			case LEVEL1:
-				System.out.println("Nivel 1");
-				break;
-			case LEVEL2:
-				System.out.println("Nivel 2");
-				break;
-			case LEVEL3:
-				System.out.println("Nivel 3");
-				break;
-			case LEVEL4:
-				System.out.println("Nivel 4");
-				break;
-			case LEVEL5:
-				System.out.println("Nivel 5");
-				break;
-			default:
-				break;
-		}
+        if (!isLoaded) {
+			switch (eLevels) {
+				case LEVEL1:
+					// Crear el mundo
+					System.out.println("Nivel 1");
+					break;
+				case LEVEL2:
+					System.out.println("Nivel 2");
+					break;
+				case LEVEL3:
+					System.out.println("Nivel 3");
+					break;
+				case LEVEL4:
+					System.out.println("Nivel 4");
+					break;
+				case LEVEL5:
+					System.out.println("Nivel 5");
+					break;
+				default:
+					break;
+			}
+			
+			isLoaded = true;
+        }
 	}
 }

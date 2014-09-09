@@ -279,7 +279,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         		&& Gdx.input.justTouched()) {
         	
         	startButton.getBody().applyLinearImpulse(
-        			new Vector2(MathUtils.random(-1f, 1f), 1),
+        			new Vector2(MathUtils.random(-1f, 1f), 1.5f),
         			startButton.getBody().getWorldCenter(),
     				true);
         	
@@ -293,7 +293,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         		&& Gdx.input.justTouched()) {
         	
         	creditsButton.getBody().applyLinearImpulse(
-        			new Vector2(MathUtils.random(-1f, 1f), 1),
+        			new Vector2(MathUtils.random(-1f, 1f), 1.5f),
         			creditsButton.getBody().getWorldCenter(),
     				true);
         	
@@ -307,7 +307,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         		&& Gdx.input.justTouched()) {
         	
         	exitButton.getBody().applyLinearImpulse(
-        			new Vector2(MathUtils.random(-1f, 1f), 1),
+        			new Vector2(MathUtils.random(-1f, 1f), 1.5f),
         			exitButton.getBody().getWorldCenter(),
     				true);
         }

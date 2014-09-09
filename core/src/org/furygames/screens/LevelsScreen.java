@@ -29,6 +29,8 @@ public class LevelsScreen extends GenericScreen {
     public void render(float delta) {
         super.render(delta);
         
+        checkInput();
+        
         camera.update();
         debugRenderBox2D.render(world,camera.combined);
         world.step(delta, 8, 3);
@@ -155,4 +157,11 @@ public class LevelsScreen extends GenericScreen {
         world.dispose();
         debugRenderBox2D.dispose();
     }
+    
+    public void checkInput () {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+			Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 0f);
+			System.out.println("esc-");
+		}
+	}
 }

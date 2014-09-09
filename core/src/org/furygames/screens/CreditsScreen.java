@@ -29,7 +29,12 @@ public class CreditsScreen extends GenericScreen {
 
 	private Array <Author> authors;
 	
-	public CreditsScreen () {
+	public CreditsScreen () {}
+	
+	@Override
+	public void show() {
+		super.show();
+		
 		gravity = new Vector2 (MathUtils.random(-10f, 10f), MathUtils.random(-10f, 10f));
 		world = new World (gravity, false);
 		
@@ -137,7 +142,7 @@ public class CreditsScreen extends GenericScreen {
 	
 	public void checkInput () {
 		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-			Timer.schedule(new ScreenSwitchTask(EScreen.CREDITS), 1f);
+			Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 0f);
 			System.out.println("esc-");
 		}
 	}

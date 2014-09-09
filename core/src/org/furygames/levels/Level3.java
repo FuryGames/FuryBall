@@ -2,23 +2,24 @@ package org.furygames.levels;
 
 import com.badlogic.gdx.physics.box2d.World;
 
-public abstract class GenericLevel implements ILevel {
-	
-	protected double time; // Tiempo del nivel
-	protected World world;
+public class Level3 extends GenericLevel {
 
+	public Level3 () {
+		// Crear objetos
+	}
+	
 	@Override
 	public void createLevel(World world) {
-		this.world = world;
+		super.createLevel(world);
 	}
 	
 	@Override
 	public void destroyLevel() {
-		// Destruir nivel
+		
 	}
-	
+
 	@Override
 	public void run() {
-		// Interacciones genéricas del nivel
+		System.out.println("level3 xd");
 	}
 }

@@ -19,7 +19,7 @@ public class Level5 extends GenericLevel {
 	}
 
 	@Override
-	public void run() {
+	public void act() {
 		System.out.println("level5 xd");
 	}
 }

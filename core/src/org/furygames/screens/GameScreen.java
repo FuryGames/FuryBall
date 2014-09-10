@@ -97,7 +97,7 @@ public class GameScreen extends GenericScreen {
         
         // Interacciones del nivel
         if (currentLevel != null)
-        	currentLevel.run();
+        	currentLevel.act();
         
         // Eliminar nivel si lo necesita
         if (needsToBeCleaned) {

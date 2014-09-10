@@ -15,7 +15,7 @@ public abstract class GenericScreen implements Screen {
 	// Propuesta: Unidades de mediada que podemos utilizar para posicionar las figuras
 	public static final float WUNIT = WIDTH / 10;
 	public static final float HUNIT = HEIGHT / 10;
-		
+
 	protected Stage stage;
 	protected SpriteBatch batch;
 	

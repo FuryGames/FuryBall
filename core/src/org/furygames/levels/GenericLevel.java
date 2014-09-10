@@ -18,7 +18,7 @@ public abstract class GenericLevel implements ILevel {
 	}
 	
 	@Override
-	public void run() {
+	public void act() {
 		// Interacciones genéricas del nivel
 	}
 }

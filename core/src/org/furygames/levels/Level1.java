@@ -8,17 +8,14 @@ public class Level1 extends GenericLevel {
 
     private Author author;
 
-	public Level1 () {
+	public Level1 (World world) {
+        super(world);
+
 		author = new Author(GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 5,
                 world, GenericScreen.WUNIT, Author.EAuthors.WRITKAS);
 	}
-	
-	@Override
-	public void createLevel(World world) {
-		super.createLevel(world);
-	}
-	
-	@Override
+
+    @Override
 	public void destroyLevel() {
 		
 	}

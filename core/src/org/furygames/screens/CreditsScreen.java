@@ -82,6 +82,11 @@ public class CreditsScreen extends GenericScreen {
 				world, 
 				MathUtils.random(1.5f, 3f),
 				EAuthors.DANIROD));
+        authors.add(new Author(MathUtils.random(.5f, WIDTH - .5f),
+                MathUtils.random(.5f, HEIGHT - .5f),
+                world,
+                MathUtils.random(1.5f, 3f),
+                EAuthors.SEBA));
 		
 		// Crear Limites
 		Box2DCreator.createLimits(world);
@@ -129,8 +134,7 @@ public class CreditsScreen extends GenericScreen {
 
 	@Override
 	public void dispose() {
-		System.out.println("Dispose CreditScreen");
-		
+
 		// Cancela todas las tareas
 		task.cancel();
 		

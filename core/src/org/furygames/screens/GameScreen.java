@@ -1,5 +1,7 @@
 package org.furygames.screens;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import org.furygames.actors.Box2DCreator;
 import org.furygames.levels.ELevels;
 import org.furygames.levels.ILevel;
@@ -64,28 +66,23 @@ public class GameScreen extends GenericScreen {
         if (!isLoaded) {
 			switch (eLevels) {
 				case LEVEL1:
-					Level1 level1 = new Level1();
-					level1.createLevel(world);
+					Level1 level1 = new Level1(world);
 					currentLevel = level1;
 					break;
 				case LEVEL2:
-					Level2 level2 = new Level2();
-					level2.createLevel(world);
+					Level2 level2 = new Level2(world);
 					currentLevel = level2;
 					break;
 				case LEVEL3:
-					Level3 level3 = new Level3();
-					level3.createLevel(world);
+					Level3 level3 = new Level3(world);
 					currentLevel = level3;
 					break;
 				case LEVEL4:
-					Level4 level4 = new Level4();
-					level4.createLevel(world);
+					Level4 level4 = new Level4(world);
 					currentLevel = level4;
 					break;
 				case LEVEL5:
-					Level5 level5 = new Level5();
-					level5.createLevel(world);
+					Level5 level5 = new Level5(world);
 					currentLevel = level5;
 					break;
 				default:
@@ -104,5 +101,32 @@ public class GameScreen extends GenericScreen {
         	currentLevel.destroyLevel();
         	needsToBeCleaned = false;
         }
+
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+
+        world.getBodies(worldBodies);
+
+        for (Body body : worldBodies) {
+            if (body.getUserData() instanceof Sprite) {
+                Sprite sprite = (Sprite) body.getUserData();
+
+				/*
+				 * Set body position equals to box position. We also need to
+				 * center it in the box (measures are relative to body center).
+				 */
+                Vector2 position = body.getPosition();
+                sprite.setPosition(position.x - sprite.getWidth() / 2,
+                        position.y - sprite.getWidth() / 2);
+
+				/* Set sprite rotation equals to body rotation */
+                sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+
+				/* Draw the sprite on screen */
+                sprite.draw(batch);
+            }
+        }
+
+        batch.end();
 	}
 }

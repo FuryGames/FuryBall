@@ -15,7 +15,8 @@ public class Author extends GenericAuthor implements Disposable {
 		JRF,
 		ENKI,
 		GUITAURICIO,
-		DANIROD
+        DANIROD,
+		SEBA,
 	}
 	
 	public Author (float posX, float posY, World world, float size, EAuthors eAuthors) {
@@ -37,6 +38,9 @@ public class Author extends GenericAuthor implements Disposable {
 			case DANIROD:
 				ttAvatar = assets.manager.get("actors/authors/danirod.png", Texture.class);
 				break;
+            case SEBA:
+                ttAvatar = assets.manager.get("actors/authors/danirod.png", Texture.class);
+                break;
 		}
 		
 		avatar = new Sprite (ttAvatar);

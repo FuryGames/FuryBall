@@ -152,9 +152,10 @@ public class LevelsScreen extends GenericScreen {
     {
         dispose();
     }
+
     public void dispose()
     {
-        world.dispose();
+        //world.dispose();
         debugRenderBox2D.dispose();
     }
     

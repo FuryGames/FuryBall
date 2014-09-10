@@ -4,13 +4,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Level4 extends GenericLevel {
 
-	public Level4 () {
-		// Crear objetos
-	}
-	
-	@Override
-	public void createLevel(World world) {
-		super.createLevel(world);
+	public Level4 (World world) {
+        super(world);
+        // Crear objetos
 	}
 	
 	@Override

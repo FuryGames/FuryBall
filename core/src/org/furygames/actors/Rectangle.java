@@ -26,6 +26,9 @@ public class Rectangle extends GenericFigure {
         rect.setAsBox(GenericScreen.WUNIT, GenericScreen.HUNIT);
 
         body = world.createBody(bd);
+
+        fixDef.shape = new PolygonShape();
+
         body.createFixture(fixDef);
         body.setUserData(spImg);
 

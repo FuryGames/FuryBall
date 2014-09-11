@@ -13,7 +13,7 @@ public class Rectangle extends GenericFigure {
     private PolygonShape rect;
 
     public Rectangle(World world, float posX, float posY) {
-        super("actors/figures/wall-square.png", world);
+        super("actors/figures/wall-column.png", world);
 
         spImg.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
         spImg.setOrigin(spImg.getWidth() / 2, spImg.getHeight() / 2);
@@ -24,10 +24,9 @@ public class Rectangle extends GenericFigure {
 
         rect = new PolygonShape();
         rect.setAsBox(GenericScreen.WUNIT, GenericScreen.HUNIT);
+        fixDef.shape = rect;
 
         body = world.createBody(bd);
-
-        fixDef.shape = new PolygonShape();
 
         body.createFixture(fixDef);
         body.setUserData(spImg);

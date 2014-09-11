@@ -5,9 +5,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import org.furygames.screens.GenericScreen;
 
-/**
- * Created by writkas on 10/09/14.
- */
 public class Rectangle extends GenericFigure {
 
     private PolygonShape rect;

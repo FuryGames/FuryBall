@@ -31,4 +31,10 @@ public class Ball extends GenericFigure {
 
         circle.dispose();
     }
+
+    public void changeImage (int numImg) {
+        switch (numImg) {
+            
+        }
+    }
 }

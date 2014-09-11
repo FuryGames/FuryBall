@@ -57,7 +57,7 @@ public class GameScreen extends GenericScreen {
 		if (eLevels == null)
 			eLevels = ELevels.LEVEL1;
 		
-		// Crear Limites (Test)
+		// Crear Limites
 		Box2DCreator.createLimits(world);
 
         gravityInput = new GravityInput();

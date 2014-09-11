@@ -39,7 +39,7 @@ public class Author extends GenericAuthor implements Disposable {
 				ttAvatar = assets.manager.get("actors/authors/danirod.png", Texture.class);
 				break;
             case SEBA:
-                ttAvatar = assets.manager.get("actors/authors/danirod.png", Texture.class);
+                ttAvatar = assets.manager.get("actors/authors/seba.png", Texture.class);
                 break;
 		}
 		

@@ -10,21 +10,21 @@ public class Level1 extends GenericLevel {
     private Author author;
     private Rectangle rect;
 
-	public Level1 (World world) {
+    public Level1(World world) {
         super(world);
 
-		author = new Author(GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 5,
+        author = new Author(GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 5,
                 world, GenericScreen.WUNIT, Author.EAuthors.WRITKAS);
         rect = new Rectangle(world, GenericScreen.WUNIT * 3, GenericScreen.HUNIT * 2);
-	}
+    }
 
     @Override
-	public void destroyLevel() {
-		
-	}
+    public void destroyLevel() {
+        //  TODO
+    }
 
-	@Override
-	public void act() {
-		System.out.println("level1 xd");
-	}
+    @Override
+    public void act() {
+        //TODO
+    }
 }

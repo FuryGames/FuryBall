@@ -19,7 +19,11 @@ public class Ball extends GenericFigure {
 
         circle = new CircleShape();
         circle.setRadius(radius);
+
         fixDef.shape = circle;
+        fixDef.density = .5f;
+        fixDef.restitution = .5f;
+        fixDef.friction = .5f;
 
         body = world.createBody(bd);
         body.createFixture(fixDef);

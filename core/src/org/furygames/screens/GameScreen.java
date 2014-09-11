@@ -1,8 +1,11 @@
 package org.furygames.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import org.furygames.actors.Box2DCreator;
+import org.furygames.inputs.GravityInput;
+import org.furygames.inputs.VirtualController;
 import org.furygames.levels.ELevels;
 import org.furygames.levels.ILevel;
 import org.furygames.levels.Level1;
@@ -19,6 +22,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 public class GameScreen extends GenericScreen {
+
+    private final float GRAVITY_FORCE = 5f;
 	
 	private Box2DDebugRenderer debug;
 	private OrthographicCamera camera;
@@ -26,6 +31,7 @@ public class GameScreen extends GenericScreen {
 	private Array<Body> worldBodies;
 	private Vector2 gravity;
 	private ILevel currentLevel; // Nivel actual
+    private GravityInput gravityInput;
 	
 	// Si el nivel esta cargado
 	public static boolean isLoaded = false;
@@ -53,12 +59,17 @@ public class GameScreen extends GenericScreen {
 		
 		// Crear Limites (Test)
 		Box2DCreator.createLimits(world);
+
+        gravityInput = new GravityInput();
+        Gdx.input.setInputProcessor(gravityInput);
 	}
 	
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		
+
+        inputGravity();
+
 		camera.update();
         debug.render(world, camera.combined);
         world.step(delta, 8, 3);
@@ -129,4 +140,31 @@ public class GameScreen extends GenericScreen {
 
         batch.end();
 	}
+
+    private void inputGravity() {
+        if (VirtualController.isGUp()) {
+            gravity.set(0f, GRAVITY_FORCE);
+            world.setGravity(gravity);
+        }
+
+        else if (VirtualController.isGDown()) {
+            gravity.set(0f, -GRAVITY_FORCE);
+            world.setGravity(gravity);
+        }
+
+        else if (VirtualController.isGLeft()) {
+            gravity.set(-GRAVITY_FORCE, 0f);
+            world.setGravity(gravity);
+        }
+
+        else if (VirtualController.isGRight()) {
+            gravity.set(GRAVITY_FORCE, 0f);
+            world.setGravity(gravity);
+        }
+
+        else if (VirtualController.isgNeutral()) {
+            gravity.set(0f, 0f);
+            world.setGravity(gravity);
+        }
+    }
 }

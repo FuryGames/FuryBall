@@ -193,12 +193,6 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 	}
 
 	@Override
-	public void hide() {
-		dispose();
-
-	}
-
-	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
 

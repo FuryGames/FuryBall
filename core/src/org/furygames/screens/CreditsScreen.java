@@ -134,7 +134,6 @@ public class CreditsScreen extends GenericScreen {
 
 	@Override
 	public void dispose() {
-
 		// Cancela todas las tareas
 		task.cancel();
 		
@@ -145,9 +144,9 @@ public class CreditsScreen extends GenericScreen {
 	}
 	
 	public void checkInput () {
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)
+                || Gdx.input.isKeyJustPressed(Keys.BACK)) {
 			Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 0f);
-			System.out.println("esc-");
 		}
 	}
 }

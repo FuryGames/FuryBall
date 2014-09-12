@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class GameScreen extends GenericScreen {
 
-    private final float GRAVITY_FORCE = 5f;
+    private final float GRAVITY_FORCE = 3f;
 	
 	private Box2DDebugRenderer debug;
 	private OrthographicCamera camera;

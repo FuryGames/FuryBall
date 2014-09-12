@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
@@ -19,7 +18,7 @@ import com.badlogic.gdx.utils.Timer;
 public class LevelsScreen extends GenericScreen {
     private OrthographicCamera camera;
     private World world;
-    private Box2DDebugRenderer debugRenderBox2D;
+    private Box2DDebugRenderer debug;
 
     Body levelall;
     Body level_A1,level_A2,level_A3;
@@ -32,7 +31,7 @@ public class LevelsScreen extends GenericScreen {
         checkInput();
         
         camera.update();
-        debugRenderBox2D.render(world,camera.combined);
+        debug.render(world, camera.combined);
         world.step(delta, 8, 3);
 
         // Esto es solo por el momento
@@ -62,9 +61,8 @@ public class LevelsScreen extends GenericScreen {
         }
     }
     
-    public void show()
-    {
-        debugRenderBox2D = new Box2DDebugRenderer();
+    public void show() {
+        debug = new Box2DDebugRenderer();
         world = new World(new Vector2(0,-9.81f),true);
         camera = new OrthographicCamera(WIDTH,HEIGHT);
         camera.position.set(WIDTH/2,HEIGHT/2,0);
@@ -153,16 +151,15 @@ public class LevelsScreen extends GenericScreen {
         dispose();
     }
 
-    public void dispose()
-    {
+    public void dispose() {
         //world.dispose();
-        debugRenderBox2D.dispose();
+        debug.dispose();
     }
     
     public void checkInput () {
-		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+		if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)
+                || Gdx.input.isKeyJustPressed(Keys.BACK)) {
 			Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 0f);
-			System.out.println("esc-");
 		}
 	}
 }

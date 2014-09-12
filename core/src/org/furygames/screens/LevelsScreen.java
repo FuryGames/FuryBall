@@ -146,10 +146,6 @@ public class LevelsScreen extends GenericScreen {
         }
         world.createJoint(distanceJointDef);
     }
-    public void hide()
-    {
-        dispose();
-    }
 
     public void dispose() {
         //world.dispose();

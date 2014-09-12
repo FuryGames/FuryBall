@@ -3,11 +3,12 @@ package org.furygames.actors;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.World;
+import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 
 public class Ball extends GenericFigure {
     private CircleShape circle;
 
-    public Ball (World world, float posX, float posY, float radius) {
+    public Ball(World world, float posX, float posY, float radius) {
         super("actors/figures/ball/alien_1.png", world);
 
         spImg.setSize(radius * 2, radius * 2);
@@ -27,7 +28,7 @@ public class Ball extends GenericFigure {
 
         body = world.createBody(bd);
         body.createFixture(fixDef);
-        body.setUserData(spImg);
+        body.setUserData(new Box2DSprite(spImg));
 
         circle.dispose();
     }

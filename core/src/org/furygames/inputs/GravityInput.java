@@ -15,18 +15,18 @@ public class GravityInput extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
-            case Input.Keys.W:
-                VirtualController.setGUp(true);
-                break;
-            case Input.Keys.X:
-                VirtualController.setGDown(true);
-                break;
-            case Input.Keys.A:
-                VirtualController.setGLeft(true);
-                break;
-            case Input.Keys.D:
-                VirtualController.setGRight(true);
-                break;
+//            case Input.Keys.W:
+//                VirtualController.setGUp(true);
+//                break;
+//            case Input.Keys.X:
+//                VirtualController.setGDown(true);
+//                break;
+//            case Input.Keys.A:
+//                VirtualController.setGLeft(true);
+//                break;
+//            case Input.Keys.D:
+//                VirtualController.setGRight(true);
+//                break;
             case Input.Keys.S:
                 VirtualController.setgNeutral(true);
                 break;
@@ -38,18 +38,18 @@ public class GravityInput extends InputAdapter {
     @Override
     public boolean keyUp(int keycode) {
         switch (keycode) {
-            case Input.Keys.W:
-                VirtualController.setGUp(false);
-                break;
-            case Input.Keys.X:
-                VirtualController.setGDown(false);
-                break;
-            case Input.Keys.A:
-                VirtualController.setGLeft(false);
-                break;
-            case Input.Keys.D:
-                VirtualController.setGRight(false);
-                break;
+//            case Input.Keys.W:
+//                VirtualController.setGUp(false);
+//                break;
+//            case Input.Keys.X:
+//                VirtualController.setGDown(false);
+//                break;
+//            case Input.Keys.A:
+//                VirtualController.setGLeft(false);
+//                break;
+//            case Input.Keys.D:
+//                VirtualController.setGRight(false);
+//                break;
             case Input.Keys.S:
                 VirtualController.setgNeutral(false);
                 break;

@@ -9,10 +9,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import org.furygames.furyball.FuryBall;
 
-/**
- * Created by writkas on 10/09/14.
- */
-
 public abstract class GenericFigure implements Disposable {
 
     protected Sprite spImg;
@@ -21,7 +17,6 @@ public abstract class GenericFigure implements Disposable {
     protected BodyDef bd;
     protected FixtureDef fixDef;
     protected World world;
-    protected float posX, posY;
 
     public GenericFigure (String imgPath, World world) {
         this.world = world;
@@ -37,10 +32,5 @@ public abstract class GenericFigure implements Disposable {
     @Override
     public void dispose() {
         ttImg.dispose();
-    }
-
-    public void setPosition (float posX, float posY) {
-        this.posX = posX;
-        this.posY = posY;
     }
 }

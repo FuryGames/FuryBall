@@ -15,7 +15,6 @@ public class Ball extends GenericFigure {
         spImg.setSize(radius * 2, radius * 2);
         spImg.setOrigin(spImg.getWidth() / 2, spImg.getHeight() / 2);
 
-        super.setPosition(posX, posY);
         bd.position.set(posX, posY);
         bd.type = BodyDef.BodyType.DynamicBody;
 

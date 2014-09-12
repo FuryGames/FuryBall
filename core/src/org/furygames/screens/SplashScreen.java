@@ -23,6 +23,7 @@ public class SplashScreen extends GenericScreen {
 
         BackgroundActor bgActor = new BackgroundActor(sprite);
         bgActor.setCenterPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        bgActor.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.addActor(bgActor);

@@ -18,7 +18,6 @@ public class Triangle extends GenericFigure {
 
         spImg.setSize(1, 1);
 
-        super.setPosition(posX, posY);
         bd.position.set(posX, posY);
         bd.type = BodyDef.BodyType.StaticBody;
 

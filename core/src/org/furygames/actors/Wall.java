@@ -14,7 +14,6 @@ public class Wall extends GenericFigure {
         spImg.setSize(sizeX * 2, sizeY * 2);
         spImg.setOrigin(sizeX / 2, sizeY / 2);
 
-        //super.setPosition(posX, posY);
         bd.position.set(posX, posY);
         bd.type = BodyDef.BodyType.StaticBody;
 

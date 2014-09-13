@@ -13,19 +13,20 @@ public class Triangle extends GenericFigure {
 
     private PolygonShape tri;
 
-    public Triangle(World world, float posX, float posY) {
-        super("actors/figures/wall-column.png", world);
+    public Triangle(World world, float posX, float posY, float angleRadians) {
+        super("actors/figures/elementMetal000.png", world);
 
         spImg.setSize(1, 1);
 
         super.setPosition(posX, posY);
         bd.position.set(posX, posY);
+        bd.angle = angleRadians;
         bd.type = BodyDef.BodyType.StaticBody;
 
         Vector2[] vertices = new Vector2[3];
-        vertices[0] = new Vector2(-0.5f, 0);
-        vertices[1] = new Vector2(0, 1);
-        vertices[2] = new Vector2(0.5f, 0);
+        vertices[0] = new Vector2(-0.6f, 0);
+        vertices[1] = new Vector2(0, 0.8f);
+        vertices[2] = new Vector2(0.6f, 0);
         tri = new PolygonShape();
         tri.set(vertices);
         fixDef.shape = tri;

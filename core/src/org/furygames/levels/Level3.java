@@ -15,11 +15,11 @@ public class Level3 extends GenericLevel {
     public Level3(World world) {
         super(world);
 
-        ball = new Ball(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 5,
+        ball = new Ball(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 1,
                 GenericScreen.HUNIT / 2);
-        rect = new Rectangle(world, GenericScreen.WUNIT * 3, GenericScreen.HUNIT * 2);
+        rect = new Rectangle(world, GenericScreen.WUNIT * 6, GenericScreen.HUNIT * 5, 0);
 
-        tri = new Triangle(world, GenericScreen.WUNIT * 7, GenericScreen.HUNIT * 5);
+        tri = new Triangle(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 3, (float) Math.PI);
     }
 
     @Override

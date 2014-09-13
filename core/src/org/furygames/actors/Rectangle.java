@@ -9,7 +9,7 @@ public class Rectangle extends GenericFigure {
 
     private PolygonShape rect;
 
-    public Rectangle(World world, float posX, float posY) {
+    public Rectangle(World world, float posX, float posY, float angleRad) {
         super("actors/figures/wall-column.png", world);
 
         spImg.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
@@ -17,6 +17,7 @@ public class Rectangle extends GenericFigure {
 
         super.setPosition(posX, posY);
         bd.position.set(posX, posY);
+        bd.angle = angleRad;
         bd.type = BodyDef.BodyType.StaticBody;
 
         rect = new PolygonShape();

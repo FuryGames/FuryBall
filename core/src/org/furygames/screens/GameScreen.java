@@ -143,31 +143,6 @@ public class GameScreen extends GenericScreen {
         if (VirtualController.isForce()) {
             gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f), GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
             world.setGravity(gravity);
-
-//        if (VirtualController.isgUpRight()) {
-//            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f), GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
-//            world.setGravity(gravity);
-//        } else if (VirtualController.isgUpLeft()) {
-//            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f), GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
-//            world.setGravity(gravity);
-//        } else if (VirtualController.isgDownRight()) {
-//            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f), GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
-//            world.setGravity(gravity);
-//        } else if (VirtualController.isgDownLeft()) {
-//            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f), GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
-//            world.setGravity(gravity);
-//        } else if (VirtualController.isgUp()) {
-//            gravity.set(0f, GRAVITY_FORCE);
-//            world.setGravity(gravity);
-//        } else if (VirtualController.isgDown()) {
-//            gravity.set(0f, -GRAVITY_FORCE);
-//            world.setGravity(gravity);
-//        } else if (VirtualController.isgLeft()) {
-//            gravity.set(-GRAVITY_FORCE, 0f);
-//            world.setGravity(gravity);
-//        } else if (VirtualController.isgRight()) {
-//            gravity.set(GRAVITY_FORCE, 0f);
-//            world.setGravity(gravity);
         } else if (VirtualController.isgNeutral()) {
             gravity.set(0f, 0f);
             world.setGravity(gravity);

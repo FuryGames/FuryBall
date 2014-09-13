@@ -8,15 +8,23 @@ import org.furygames.screens.GenericScreen;
 public class Level1 extends GenericLevel {
 
     private Ball ball;
-    private Wall rect;
+    private Wall walls [];
 
     public Level1(World world) {
         super(world);
 
-        ball = new Ball(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 5,
+        walls = new Wall [3];
+
+        ball = new Ball(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 1,
                 GenericScreen.HUNIT / 2);
-        rect = new Wall(world, GenericScreen.WUNIT * 3, GenericScreen.HUNIT * 3,
-                1f, 1f);
+
+        walls[0] = new Wall(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 6,
+                GenericScreen.WUNIT / 3,  GenericScreen.HUNIT * 2);
+        walls[1] = new Wall(world, GenericScreen.WUNIT * 3, GenericScreen.HUNIT * 8,
+                GenericScreen.WUNIT * 1.655f,  GenericScreen.HUNIT / 2);
+        walls[2] = new Wall(world, GenericScreen.WUNIT * 7, GenericScreen.HUNIT * 8,
+                GenericScreen.WUNIT * 1.655f,  GenericScreen.HUNIT / 2);
+
     }
 
     @Override

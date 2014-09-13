@@ -14,6 +14,8 @@ import org.furygames.furyball.FuryBall;
 
 public class SplashScreen extends GenericScreen {
 
+    private final float DURATION = .5f; // 4f <- original
+
     private Sprite sprite;
 
     public SplashScreen() {
@@ -44,11 +46,11 @@ public class SplashScreen extends GenericScreen {
             public void run() {
                 ScreenManager.getInstance().show(EScreen.MENU);
             }
-        }, 4.0f);
+        }, DURATION);
 
-        Music music = FuryBall.assets.manager.get("sounds/music/Mauricio Vera - Ausencia.mp3", Music.class);
+        /* Music music = FuryBall.assets.manager.get("sounds/music/Mauricio Vera - Ausencia.mp3", Music.class);
         music.play();
-        music.setLooping(true);
+        music.setLooping(true); */
     }
 
     @Override

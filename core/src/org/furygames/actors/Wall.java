@@ -3,6 +3,7 @@ package org.furygames.actors;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 
 public class Wall extends GenericFigure {
 
@@ -10,9 +11,6 @@ public class Wall extends GenericFigure {
 
     public Wall(World world, float posX, float posY, float sizeX, float sizeY) {
         super("actors/figures/wall-square.png", world);
-
-        spImg.setSize(sizeX * 2, sizeY * 2);
-        spImg.setOrigin(sizeX / 2, sizeY / 2);
 
         bd.position.set(posX, posY);
         bd.type = BodyDef.BodyType.StaticBody;
@@ -24,7 +22,7 @@ public class Wall extends GenericFigure {
         body = world.createBody(bd);
 
         body.createFixture(fixDef);
-        body.setUserData(spImg);
+        body.setUserData(new Box2DSprite(spImg));
 
         wall.dispose();
     }

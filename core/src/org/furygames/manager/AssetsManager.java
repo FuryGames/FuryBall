@@ -36,6 +36,7 @@ public class AssetsManager {
         manager.load("actors/figures/ball/alien_4.png", Texture.class);
         manager.load("actors/figures/wall-square.png", Texture.class);
         manager.load("actors/figures/wall-column.png", Texture.class);
+        manager.load("actors/figures/elementMetal000.png", Texture.class);
         
         // Musics
         //

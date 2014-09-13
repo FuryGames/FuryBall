@@ -27,15 +27,6 @@ public class GestureInput implements GestureDetector.GestureListener {
         float direccionX = movX - x;
         float direccionY = movY - y;
 
-//        if (direccionX > 0 && direccionY > 0)
-//            VirtualController.setgUpRight(true);
-//        else if (direccionX < 0 && direccionY > 0)
-//            VirtualController.setgUpLeft(true);
-//        else if (direccionX > 0 && direccionY < 0)
-//            VirtualController.setgDownRight(true);
-//        else if (direccionX < 0 && direccionY < 0)
-//            VirtualController.setgDownLeft(true);
-
         VirtualController.setForce(true);
         VirtualController.setgForce(direccionX, direccionY);
 

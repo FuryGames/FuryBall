@@ -4,14 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 import org.furygames.actors.Box2DCreator;
+import org.furygames.furyball.FuryBall;
 import org.furygames.inputs.GestureInput;
-import org.furygames.inputs.GravityInput;
 import org.furygames.inputs.VirtualController;
 import org.furygames.levels.*;
 
@@ -25,7 +23,6 @@ public class GameScreen extends GenericScreen {
     private Array<Body> worldBodies;
     private Vector2 gravity;
     private ILevel currentLevel; // Nivel actual
-    private GravityInput gravityInput;
 
     // Si el nivel esta cargado
     public static boolean isLoaded = false;
@@ -34,6 +31,8 @@ public class GameScreen extends GenericScreen {
     public static ELevels eLevels;
 
     public GameScreen() {
+        FuryBall.assets.cargarAssets();
+        FuryBall.assets.manager.finishLoading();
     }
 
     @Override
@@ -81,6 +80,37 @@ public class GameScreen extends GenericScreen {
                 case LEVEL3:
                     Level3 level3 = new Level3(world);
                     currentLevel = level3;
+                    world.setContactListener(new ContactListener() {
+                        @Override
+                        public void beginContact(Contact contact) {
+                            final Fixture fixtureA = contact.getFixtureA();
+                            final Fixture fixtureB = contact.getFixtureB();
+
+                            if (fixtureA.getUserData() == null)
+                                return;
+
+                            if (fixtureB.getUserData() == null)
+                                return;
+
+                            if (!fixtureA.getUserData().equals("Portal") && !fixtureB.getUserData().equals("Portal"))
+                                return;
+
+                            currentLevel.setColliding(true);
+                        }
+
+                        @Override
+                        public void endContact(Contact contact) {
+                            currentLevel.setColliding(false);
+                        }
+
+                        @Override
+                        public void preSolve(Contact contact, Manifold oldManifold) {
+                        }
+
+                        @Override
+                        public void postSolve(Contact contact, ContactImpulse impulse) {
+                        }
+                    });
                     break;
                 case LEVEL4:
                     Level4 level4 = new Level4(world);

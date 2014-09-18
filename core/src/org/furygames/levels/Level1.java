@@ -35,4 +35,14 @@ public class Level1 extends GenericLevel {
     public void act() {
         //TODO
     }
+
+    @Override
+    public void setColliding(boolean bool) {
+
+    }
+
+    @Override
+    public boolean isColliding() {
+        return false;
+    }
 }

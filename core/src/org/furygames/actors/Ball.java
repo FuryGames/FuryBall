@@ -3,33 +3,40 @@ package org.furygames.actors;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import org.furygames.furyball.FuryBall;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 
 public class Ball extends GenericFigure {
+
     private CircleShape circle;
 
     public Ball(World world, float posX, float posY, float radius) {
         super("actors/figures/ball/alien_1.png", world);
 
-        spImg.setSize(radius * 2, radius * 2);
-        spImg.setOrigin(spImg.getWidth() / 2, spImg.getHeight() / 2);
+        sprite.setSize(radius * 2, radius * 2);
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 
-        bd.position.set(posX, posY);
-        bd.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(posX, posY);
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(posX, posY);
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
 
         circle = new CircleShape();
         circle.setRadius(radius);
 
-        fixDef.shape = circle;
-        fixDef.density = .5f;
-        fixDef.restitution = .5f;
-        fixDef.friction = .5f;
+        fixtureDef.shape = circle;
+        fixtureDef.density = .5f;
+        fixtureDef.restitution = .5f;
+        fixtureDef.friction = .5f;
 
-        body = world.createBody(bd);
-        body.createFixture(fixDef);
-        body.setUserData(new Box2DSprite(spImg));
+        body = world.createBody(bodyDef);
+
+        Fixture fixture = body.createFixture(fixtureDef);
+        fixture.setUserData("Ball");
+
+        body.setUserData(new Box2DSprite(sprite));
 
         circle.dispose();
     }
@@ -53,6 +60,6 @@ public class Ball extends GenericFigure {
         }
 
         Texture tt = FuryBall.assets.manager.get(img, Texture.class);
-        spImg.setTexture(tt);
+        sprite.setTexture(tt);
     }
 }

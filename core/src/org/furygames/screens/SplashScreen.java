@@ -2,7 +2,6 @@ package org.furygames.screens;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -51,6 +50,7 @@ public class SplashScreen extends GenericScreen {
         /* Music music = FuryBall.assets.manager.get("sounds/music/Mauricio Vera - Ausencia.mp3", Music.class);
         music.play();
         music.setLooping(true); */
+
     }
 
     @Override

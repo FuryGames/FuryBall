@@ -12,17 +12,17 @@ public class Wall extends GenericFigure {
     public Wall(World world, float posX, float posY, float sizeX, float sizeY) {
         super("actors/figures/wall-square.png", world);
 
-        bd.position.set(posX, posY);
-        bd.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(posX, posY);
+        bodyDef.type = BodyDef.BodyType.StaticBody;
 
         wall = new PolygonShape();
         wall.setAsBox(sizeX, sizeY);
-        fixDef.shape = wall;
+        fixtureDef.shape = wall;
 
-        body = world.createBody(bd);
+        body = world.createBody(bodyDef);
 
-        body.createFixture(fixDef);
-        body.setUserData(new Box2DSprite(spImg));
+        body.createFixture(fixtureDef);
+        body.setUserData(new Box2DSprite(sprite));
 
         wall.dispose();
     }

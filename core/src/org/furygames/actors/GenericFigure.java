@@ -11,26 +11,34 @@ import org.furygames.furyball.FuryBall;
 
 public abstract class GenericFigure implements Disposable {
 
-    protected Sprite spImg;
-    protected Texture ttImg;
+    protected Sprite sprite;
+    protected Texture texture;
     protected Body body;
-    protected BodyDef bd;
-    protected FixtureDef fixDef;
+    protected BodyDef bodyDef;
+    protected FixtureDef fixtureDef;
     protected World world;
 
-    public GenericFigure (String imgPath, World world) {
+    public GenericFigure(String imgPath, World world) {
         this.world = world;
 
-        ttImg = FuryBall.assets.manager.get(imgPath, Texture.class);
-        spImg = new Sprite(ttImg);
+        texture = FuryBall.assets.manager.get(imgPath, Texture.class);
+        sprite = new Sprite(texture);
 
-        bd = new BodyDef();
+        bodyDef = new BodyDef();
 
-        fixDef = new FixtureDef();
+        fixtureDef = new FixtureDef();
     }
 
     @Override
     public void dispose() {
-        ttImg.dispose();
+        texture.dispose();
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
     }
 }

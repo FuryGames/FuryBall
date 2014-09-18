@@ -2,6 +2,7 @@ package org.furygames.actors;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
@@ -16,12 +17,12 @@ public class Triangle extends GenericFigure {
     public Triangle(World world, float posX, float posY, float angleRadians) {
         super("actors/figures/elementMetal000.png", world);
 
-        spImg.setSize(1, 1);
+        sprite.setSize(1, 1);
 
         super.setPosition(posX, posY);
-        bd.position.set(posX, posY);
-        bd.angle = angleRadians;
-        bd.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(posX, posY);
+        bodyDef.angle = angleRadians;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
 
         Vector2[] vertices = new Vector2[3];
         vertices[0] = new Vector2(-0.6f, 0);
@@ -29,12 +30,14 @@ public class Triangle extends GenericFigure {
         vertices[2] = new Vector2(0.6f, 0);
         tri = new PolygonShape();
         tri.set(vertices);
-        fixDef.shape = tri;
+        fixtureDef.shape = tri;
 
-        body = world.createBody(bd);
+        body = world.createBody(bodyDef);
 
-        body.createFixture(fixDef);
-        body.setUserData(new Box2DSprite(spImg));
+        Fixture fixture = body.createFixture(fixtureDef);
+        fixture.setUserData("Triangle");
+
+        body.setUserData(new Box2DSprite(sprite));
 
         tri.dispose();
     }

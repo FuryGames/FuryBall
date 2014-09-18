@@ -1,6 +1,7 @@
 package org.furygames.actors;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import org.furygames.screens.GenericScreen;
@@ -9,25 +10,27 @@ public class Rectangle extends GenericFigure {
 
     private PolygonShape rect;
 
-    public Rectangle(World world, float posX, float posY, float angleRad) {
+    public Rectangle(World world, float posX, float posY, float sizeX, float sizeY, float angleRad) {
         super("actors/figures/wall-column.png", world);
 
-        spImg.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
-        spImg.setOrigin(spImg.getWidth() / 2, spImg.getHeight() / 2);
+        sprite.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 
         super.setPosition(posX, posY);
-        bd.position.set(posX, posY);
-        bd.angle = angleRad;
-        bd.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(posX, posY);
+        bodyDef.angle = angleRad;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
 
         rect = new PolygonShape();
-        rect.setAsBox(GenericScreen.WUNIT, GenericScreen.HUNIT);
-        fixDef.shape = rect;
+        rect.setAsBox(sizeX, sizeY);
+        fixtureDef.shape = rect;
 
-        body = world.createBody(bd);
+        body = world.createBody(bodyDef);
 
-        body.createFixture(fixDef);
-        body.setUserData(spImg);
+        Fixture fixture = body.createFixture(fixtureDef);
+        fixture.setUserData("Rectangle");
+
+        body.setUserData(sprite);
 
         rect.dispose();
     }

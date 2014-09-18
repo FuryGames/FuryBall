@@ -55,8 +55,6 @@ public class GameScreen extends GenericScreen {
         // Crear Limites (Test)
         Box2DCreator.createLimits(world);
 
-//        gravityInput = new GravityInput();
-//        Gdx.input.setInputProcessor(gravityInput);
         Gdx.input.setInputProcessor(new GestureDetector(new GestureInput()));
     }
 
@@ -112,28 +110,6 @@ public class GameScreen extends GenericScreen {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-//        world.getBodies(worldBodies);
-
-//        for (Body body : worldBodies) {
-//            if (body.getUserData() instanceof Sprite) {
-//                Sprite sprite = (Sprite) body.getUserData();
-//
-//				/*
-//                 * Set body position equals to box position. We also need to
-//				 * center it in the box (measures are relative to body center).
-//				 */
-//                Vector2 position = body.getPosition();
-//                sprite.setPosition(position.x - sprite.getWidth() / 2,
-//                        position.y - sprite.getWidth() / 2);
-//
-//				/* Set sprite rotation equals to body rotation */
-//                sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-//
-//				/* Draw the sprite on screen */
-//                sprite.draw(batch);
-//            }
-//        }
-
         Box2DSprite.draw(batch, world);
 
         batch.end();
@@ -141,7 +117,8 @@ public class GameScreen extends GenericScreen {
 
     private void inputGravity() {
         if (VirtualController.isForce()) {
-            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f), GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
+            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f),
+                    GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
             world.setGravity(gravity);
         } else if (VirtualController.isgNeutral()) {
             gravity.set(0f, 0f);

@@ -23,8 +23,7 @@ public class Level1 extends GenericLevel {
         walls[1] = new Wall(world, GenericScreen.WUNIT * 3, GenericScreen.HUNIT * 8,
                 GenericScreen.WUNIT * 1.655f,  GenericScreen.HUNIT / 2);
         walls[2] = new Wall(world, GenericScreen.WUNIT * 7, GenericScreen.HUNIT * 8,
-                GenericScreen.WUNIT * 1.655f,  GenericScreen.HUNIT / 2);
-
+                GenericScreen.WUNIT,  GenericScreen.HUNIT / 2);
     }
 
     @Override

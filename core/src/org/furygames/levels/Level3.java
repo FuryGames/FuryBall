@@ -45,6 +45,8 @@ public class Level3 extends GenericLevel {
     @Override
     public void act() {
         if (colliding) {
+            ball.getBody().setLinearVelocity(0, 0);
+
             ball.getBody().applyForce((portal.getBody().getPosition().x - ball.getBody().getPosition().x) * i,
                     (portal.getBody().getPosition().y - ball.getBody().getPosition().y) * i,
                     ball.getBody().getPosition().x, ball.getBody().getPosition().y, true);

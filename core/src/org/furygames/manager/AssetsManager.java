@@ -5,18 +5,18 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 
 public class AssetsManager {
-	
-	public  AssetManager manager;
-    
-    public AssetsManager(){
-    	manager = new AssetManager();
+
+    public AssetManager manager;
+
+    public AssetsManager() {
+        manager = new AssetManager();
     }
-    
-    public  void cargarAssets(){
-    	
-    	// Images
-    	//
-    	
+
+    public void cargarAssets() {
+
+        // Images
+        //
+
         manager.load("backgrounds/splash.jpg", Texture.class);
         // Menu Buttons
         manager.load("buttons/start_button.png", Texture.class);
@@ -37,14 +37,17 @@ public class AssetsManager {
         manager.load("actors/figures/wall-square.png", Texture.class);
         manager.load("actors/figures/wall-column.png", Texture.class);
         manager.load("actors/figures/elementMetal000.png", Texture.class);
-        
+
+        // Backgrounds
+        manager.load("backgrounds/spaceBackground.png", Texture.class);
+
         // Musics
         //
-        
+
         manager.load("sounds/music/Mauricio Vera - Ausencia.mp3", Music.class);
-        
+
         // Sound
         //
-        
+
     }
 }

@@ -8,11 +8,11 @@ import com.badlogic.gdx.physics.box2d.World;
 /**
  * Created by scanevaro on 17/09/2014.
  */
-public class Portal extends GenericFigure {
+public class BlackHole extends GenericFigure {
 
     private CircleShape shape;
 
-    public Portal(World world, float posX, float posY, float radius) {
+    public BlackHole(World world, float posX, float posY, float radius) {
         super("actors/figures/wall-column.png", world);
 
         sprite.setSize(radius * 2, radius * 2);
@@ -34,7 +34,7 @@ public class Portal extends GenericFigure {
         body = world.createBody(bodyDef);
 
         Fixture fixture = body.createFixture(fixtureDef);
-        fixture.setUserData("Portal");
+        fixture.setUserData("BlackHole");
 
 //        body.setUserData(new Box2DSprite(sprite));
 

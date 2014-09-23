@@ -5,7 +5,7 @@ public interface ILevel {
 
     public void act(); // Interacciones del nivel
 
-    public void setColliding(boolean bool);
+    public void setCollidingPortal(boolean bool);
 
-    public boolean isColliding();
+    public boolean isCollidingPortal();
 }

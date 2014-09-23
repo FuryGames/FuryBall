@@ -2,6 +2,8 @@ package org.furygames.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -23,6 +25,7 @@ public class GameScreen extends GenericScreen {
     private Array<Body> worldBodies;
     private Vector2 gravity;
     private ILevel currentLevel; // Nivel actual
+    private Sprite background;
 
     // Si el nivel esta cargado
     public static boolean isLoaded = false;
@@ -53,6 +56,10 @@ public class GameScreen extends GenericScreen {
 
         // Crear Limites (Test)
         Box2DCreator.createLimits(world);
+
+        background = new Sprite(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class));
+        background.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        background.setSize(1280, 720);
 
         Gdx.input.setInputProcessor(new GestureDetector(new GestureInput()));
     }
@@ -92,15 +99,20 @@ public class GameScreen extends GenericScreen {
                             if (fixtureB.getUserData() == null)
                                 return;
 
-                            if (!fixtureA.getUserData().equals("Portal") && !fixtureB.getUserData().equals("Portal"))
-                                return;
-
-                            currentLevel.setColliding(true);
+                            if (fixtureA.getUserData().equals("Portal"))
+                                currentLevel.setCollidingPortal(true);
+                            else if (fixtureB.getUserData().equals("Portal"))
+                                currentLevel.setCollidingPortal(true);
+                            else if (fixtureA.getUserData().equals("BlackHole"))
+                                ((Level3) currentLevel).setCollidingBlackHole(true);
+                            else if (fixtureB.getUserData().equals("BlackHole"))
+                                ((Level3) currentLevel).setCollidingBlackHole(true);
                         }
 
                         @Override
                         public void endContact(Contact contact) {
-                            currentLevel.setColliding(false);
+                            currentLevel.setCollidingPortal(false);
+                            ((Level3) currentLevel).setCollidingBlackHole(false);
                         }
 
                         @Override
@@ -141,6 +153,8 @@ public class GameScreen extends GenericScreen {
         batch.begin();
 
         Box2DSprite.draw(batch, world);
+
+        batch.draw(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
         batch.end();
     }

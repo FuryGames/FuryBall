@@ -14,8 +14,6 @@ public final class Box2DCreator {
 	public static void createLimits (World world) {
 		
 		final float SEPARATOR = .2f;
-		//final float WSEPARATOR = GenericScreen.WUNIT / 6;
-		//final float HSEPARATOR = GenericScreen.HUNIT / 6;
 		
 		// Bottom
 		//

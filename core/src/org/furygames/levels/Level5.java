@@ -19,12 +19,12 @@ public class Level5 extends GenericLevel {
 	}
 
     @Override
-    public void setColliding(boolean bool) {
+    public void setCollidingPortal(boolean bool) {
 
     }
 
     @Override
-    public boolean isColliding() {
+    public boolean isCollidingPortal() {
         return false;
     }
 }

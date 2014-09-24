@@ -1,9 +1,9 @@
 package org.furygames.actors;
 
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 import org.furygames.screens.GenericScreen;
 
 public class Rectangle extends GenericFigure {
@@ -11,7 +11,7 @@ public class Rectangle extends GenericFigure {
     private PolygonShape rect;
 
     public Rectangle(World world, float posX, float posY, float sizeX, float sizeY, float angleRad) {
-        super("actors/figures/wall-column.png", world);
+        super("actors/figures/rectangle.png", world);
 
         sprite.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
@@ -26,10 +26,11 @@ public class Rectangle extends GenericFigure {
 
         body = world.createBody(bodyDef);
 
-        Fixture fixture = body.createFixture(fixtureDef);
-        fixture.setUserData("Rectangle");
+        /*Fixture fixture = */
+        body.createFixture(fixtureDef);
+//        fixture.setUserData("Rectangle");
 
-        body.setUserData(sprite);
+        body.setUserData(new Box2DSprite(sprite));
 
         rect.dispose();
     }

@@ -1,9 +1,15 @@
 package org.furygames.actors;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
+import net.dermetfan.utils.libgdx.graphics.AnimatedBox2DSprite;
+import net.dermetfan.utils.libgdx.graphics.AnimatedSprite;
+import org.furygames.furyball.FuryBall;
 
 /**
  * Created by scanevaro on 17/09/2014.
@@ -36,7 +42,15 @@ public class Portal extends GenericFigure {
         Fixture fixture = body.createFixture(fixtureDef);
         fixture.setUserData("Portal");
 
-//        body.setUserData(new Box2DSprite(sprite));
+        // Set animation
+        TextureRegion portal1, portal2;
+        portal1 = new TextureRegion(FuryBall.assets.manager.get("actors/figures/Portal/Portal0000.png", Texture.class));
+        portal2 = new TextureRegion(FuryBall.assets.manager.get("actors/figures/Portal/Portal0001.png", Texture.class));
+        Animation animation = new Animation(0.6f, portal1, portal2);
+        animation.setPlayMode(Animation.PlayMode.LOOP);
+        AnimatedSprite animatedSprite = new AnimatedSprite(animation);
+        AnimatedBox2DSprite animatedBox2DSprite = new AnimatedBox2DSprite(animatedSprite);
+        body.setUserData(animatedBox2DSprite);
 
         shape.dispose();
     }

@@ -59,7 +59,7 @@ public class Level3 extends GenericLevel {
                     ball.getBody().getPosition().x, ball.getBody().getPosition().y, true);
 
             if (portal.getBody().getPosition().x - ball.getBody().getPosition().x == 0.0f)
-                win = true;
+                setWin(true);
 
             i++;
         } else if (collidingBlackHole) {

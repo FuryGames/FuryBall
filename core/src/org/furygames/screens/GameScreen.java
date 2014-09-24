@@ -1,14 +1,19 @@
 package org.furygames.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
+import org.furygames.actors.BackgroundActor;
 import org.furygames.actors.Box2DCreator;
 import org.furygames.furyball.FuryBall;
 import org.furygames.inputs.GestureInput;
@@ -32,6 +37,8 @@ public class GameScreen extends GenericScreen {
     // Cuando se necesita elimiar un nivel
     public static boolean needsToBeCleaned = false;
     public static ELevels eLevels;
+
+    public static Sound boing;
 
     public GameScreen() {
         FuryBall.assets.cargarAssets();
@@ -57,21 +64,29 @@ public class GameScreen extends GenericScreen {
         // Crear Limites (Test)
         Box2DCreator.createLimits(world);
 
-        background = new Sprite(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class));
-        background.setPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-        background.setSize(1280, 720);
+        BackgroundActor bgActor = new BackgroundActor(new Sprite(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class)));
+        bgActor.setColor(1, 1, 1, 1);
+        stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        stage.addActor(bgActor);
 
         Gdx.input.setInputProcessor(new GestureDetector(new GestureInput()));
+
+        Music music = FuryBall.assets.manager.get("sounds/music/prototipe.mp3", Music.class);
+        music.play();
+        music.setLooping(true);
+
+        boing = FuryBall.assets.manager.get("sounds/boing.mp3", Sound.class);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
+
         inputGravity();
 
         camera.update();
-        debug.render(world, camera.combined);
+
         world.step(delta, 8, 3);
 
         if (!isLoaded) {
@@ -93,11 +108,17 @@ public class GameScreen extends GenericScreen {
                             final Fixture fixtureA = contact.getFixtureA();
                             final Fixture fixtureB = contact.getFixtureB();
 
-                            if (fixtureA.getUserData() == null)
+                            if (fixtureA.getUserData() == null) {
+                                boing.play();
                                 return;
+                            }
 
-                            if (fixtureB.getUserData() == null)
+
+                            if (fixtureB.getUserData() == null) {
+                                boing.play();
                                 return;
+                            }
+
 
                             if (fixtureA.getUserData().equals("Portal"))
                                 currentLevel.setCollidingPortal(true);
@@ -149,12 +170,18 @@ public class GameScreen extends GenericScreen {
             needsToBeCleaned = false;
         }
 
+        stage.draw();
+
+        debug.render(world, camera.combined);
+
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
         Box2DSprite.draw(batch, world);
 
-        batch.draw(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        if (((Level3) currentLevel).isWin()) {
+            batch.draw(FuryBall.assets.manager.get("levelComplete.png", Texture.class), 100, 100, 100, 100);
+        }
 
         batch.end();
     }

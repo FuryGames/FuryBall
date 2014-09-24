@@ -24,7 +24,6 @@ public class BlackHole extends GenericFigure {
         sprite.setSize(radius * 2, radius * 2);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 
-        super.setPosition(posX, posY);
         bodyDef.position.set(posX, posY);
         bodyDef.type = BodyDef.BodyType.StaticBody;
 

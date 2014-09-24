@@ -12,7 +12,7 @@ public abstract class GenericScreen implements Screen {
 	public static final float WIDTH = Gdx.graphics.getWidth() / 100;
 	public static final float HEIGHT = Gdx.graphics.getHeight() / 100;
 	
-	// Propuesta: Unidades de mediada que podemos utilizar para posicionar las figuras
+	// Unidades de mediada que podemos utilizar para posicionar las figuras
 	public static final float WUNIT = WIDTH / 10;
 	public static final float HUNIT = HEIGHT / 10;
 
@@ -68,5 +68,4 @@ public abstract class GenericScreen implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-
 }

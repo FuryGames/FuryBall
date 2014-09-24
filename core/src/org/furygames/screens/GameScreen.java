@@ -82,7 +82,6 @@ public class GameScreen extends GenericScreen {
     public void render(float delta) {
         super.render(delta);
 
-
         inputGravity();
 
         camera.update();
@@ -94,6 +93,43 @@ public class GameScreen extends GenericScreen {
                 case LEVEL1:
                     Level1 level1 = new Level1(world);
                     currentLevel = level1;
+                    world.setContactListener(new ContactListener() {
+                        @Override
+                        public void beginContact(Contact contact) {
+                            final Fixture fixtureA = contact.getFixtureA();
+                            final Fixture fixtureB = contact.getFixtureB();
+
+                            if (fixtureA.getUserData() == null) {
+                                boing.play();
+                                return;
+                            }
+
+
+                            if (fixtureB.getUserData() == null) {
+                                boing.play();
+                                return;
+                            }
+
+
+                            if (fixtureA.getUserData().equals("Portal"))
+                                currentLevel.setCollidingPortal(true);
+                            else if (fixtureB.getUserData().equals("Portal"))
+                                currentLevel.setCollidingPortal(true);
+                        }
+
+                        @Override
+                        public void endContact(Contact contact) {
+                            currentLevel.setCollidingPortal(false);
+                        }
+
+                        @Override
+                        public void preSolve(Contact contact, Manifold oldManifold) {
+                        }
+
+                        @Override
+                        public void postSolve(Contact contact, ContactImpulse impulse) {
+                        }
+                    });
                     break;
                 case LEVEL2:
                     Level2 level2 = new Level2(world);
@@ -175,13 +211,16 @@ public class GameScreen extends GenericScreen {
         debug.render(world, camera.combined);
 
         batch.setProjectionMatrix(camera.combined);
+
+
         batch.begin();
 
         Box2DSprite.draw(batch, world);
 
+        /*
         if (((Level3) currentLevel).isWin()) {
             batch.draw(FuryBall.assets.manager.get("levelComplete.png", Texture.class), 100, 100, 100, 100);
-        }
+        }*/
 
         batch.end();
     }

@@ -215,9 +215,9 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         			startButton.getBody().getWorldCenter(),
     				true);
         	
-        	//Timer.schedule(new ScreenSwitchTask(EScreen.LEVELS), 1f);
+        	Timer.schedule(new ScreenSwitchTask(EScreen.LEVELS), 1f);
             // Temp
-            Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 1f);
+            //Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 1f);
         }
         
         else if (touchPos.x > spCreditsButton.getX() 

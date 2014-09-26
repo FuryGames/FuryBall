@@ -16,8 +16,8 @@ public class FuryBall extends Game {
 	public void create() {
 		ScreenManager.getInstance().initialize(this);
 //        ScreenManager.getInstance().show(EScreen.SPLASH);
-        GameScreen.eLevels = ELevels.LEVEL1;
-        ScreenManager.getInstance().show(EScreen.GAME);
+        //GameScreen.eLevels = ELevels.LEVEL1;
+        ScreenManager.getInstance().show(EScreen.SPLASH);
 	}
 
 	@Override

@@ -33,8 +33,6 @@ public class Level3 extends GenericLevel {
 
         ball = new Ball(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 1,
                 GenericScreen.HUNIT / 2);
-
-        wall = new Wall(world, GenericScreen.WUNIT * 6, GenericScreen.HUNIT * 5, 1f, 1f);
         i = 10;
 
         ball = new Ball(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 1, GenericScreen.HUNIT / 2);

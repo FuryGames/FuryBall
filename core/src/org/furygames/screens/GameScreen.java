@@ -104,12 +104,10 @@ public class GameScreen extends GenericScreen {
                                 return;
                             }
 
-
                             if (fixtureB.getUserData() == null) {
                                 boing.play();
                                 return;
                             }
-
 
                             if (fixtureA.getUserData().equals("Portal"))
                                 currentLevel.setCollidingPortal(true);
@@ -149,12 +147,10 @@ public class GameScreen extends GenericScreen {
                                 return;
                             }
 
-
                             if (fixtureB.getUserData() == null) {
                                 boing.play();
                                 return;
                             }
-
 
                             if (fixtureA.getUserData().equals("Portal"))
                                 currentLevel.setCollidingPortal(true);

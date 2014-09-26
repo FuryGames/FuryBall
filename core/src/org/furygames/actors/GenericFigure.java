@@ -21,12 +21,24 @@ public abstract class GenericFigure implements Disposable {
     public GenericFigure(String imgPath, World world) {
         this.world = world;
 
-        texture = FuryBall.assets.manager.get(imgPath, Texture.class);
-        sprite = new Sprite(texture);
+        setImg(imgPath);
 
         bodyDef = new BodyDef();
 
         fixtureDef = new FixtureDef();
+    }
+
+    public GenericFigure (World world) {
+        this.world = world;
+
+        bodyDef = new BodyDef();
+
+        fixtureDef = new FixtureDef();
+    }
+
+    public void setImg (String imgPath) {
+        texture = FuryBall.assets.manager.get(imgPath, Texture.class);
+        sprite = new Sprite(texture);
     }
 
     @Override

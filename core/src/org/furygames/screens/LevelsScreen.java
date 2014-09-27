@@ -1,5 +1,7 @@
 package org.furygames.screens;
 
+import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
+import org.furygames.actors.LevelFigure;
 import org.furygames.levels.ELevels;
 import org.furygames.timer.ScreenSwitchTask;
 
@@ -15,24 +17,42 @@ public class LevelsScreen extends GenericScreen {
     private OrthographicCamera camera;
     private World world;
     private Box2DDebugRenderer debug;
-
-    public void render(float delta) {
-        super.render(delta);
-        
-        checkInput();
-        
-        camera.update();
-        debug.render(world, camera.combined);
-        world.step(delta, 8, 3);
-    }
+    private LevelFigure [] levelFigures;
     
     public void show() {
+        super.show();
+
         debug = new Box2DDebugRenderer();
         world = new World(new Vector2(0, 0), true);
         camera = new OrthographicCamera(WIDTH, HEIGHT);
-        camera.position.set(WIDTH / 2,HEIGHT / 2, 0);
+        camera.position.set(WIDTH / 2, HEIGHT / 2, 0);
 
+        levelFigures = new LevelFigure[8];
 
+        // Level1
+        levelFigures[0] = new LevelFigure(world, 1, WUNIT, HUNIT * 8, 1f);
+        // Level2
+        levelFigures[1] = new LevelFigure(world, 2, (WUNIT * 3) + WUNIT / 2, HUNIT * 8, 1f);
+        // Level3
+        levelFigures[2] = new LevelFigure(world, 3, (WUNIT * 7) - WUNIT / 2, HUNIT * 8, 1f);
+        // Level4
+        levelFigures[3] = new LevelFigure(world, 4, WUNIT * 9, HUNIT * 8, 1f);
+    }
+
+    public void render(float delta) {
+        super.render(delta);
+
+        checkInput();
+
+        camera.update();
+        world.step(delta, 8, 3);
+        debug.render(world, camera.combined);
+
+        batch.setProjectionMatrix(camera.combined);
+
+        batch.begin();
+            Box2DSprite.draw(batch, world);
+        batch.end();
     }
 
     public void dispose() {

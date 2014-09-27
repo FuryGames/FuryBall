@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
+import org.furygames.screens.GenericScreen;
 
 /**
  * Created by writkas on 25/09/14.
@@ -12,7 +13,7 @@ public class LevelFigure extends GenericFigure {
 
     private PolygonShape rect;
 
-    public LevelFigure (World world, int numLevel, int posX, int posY, int size) {
+    public LevelFigure (World world, int numLevel, float posX, float posY, float size) {
         super(world);
 
         switch (numLevel) {
@@ -42,6 +43,9 @@ public class LevelFigure extends GenericFigure {
                 break;
         }
 
+        sprite.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+
         bodyDef.position.set(posX, posY);
         bodyDef.type = BodyDef.BodyType.StaticBody;
 
@@ -50,7 +54,6 @@ public class LevelFigure extends GenericFigure {
         fixtureDef.shape = rect;
 
         body = world.createBody(bodyDef);
-
         body.createFixture(fixtureDef);
         body.setUserData(new Box2DSprite(sprite));
 

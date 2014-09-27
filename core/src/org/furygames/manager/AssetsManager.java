@@ -48,11 +48,20 @@ public class AssetsManager {
         manager.load("actors/figures/BlackHole/BlackHole0001.png", Texture.class);
         manager.load("actors/figures/BlackHole/BlackHole0002.png", Texture.class);
         manager.load("actors/figures/BlackHole/BlackHole0003.png", Texture.class);
-
+        // Level button
+        manager.load("buttons/levels/level-1.png", Texture.class);
+        manager.load("buttons/levels/level-2.png", Texture.class);
+        manager.load("buttons/levels/level-3.png", Texture.class);
+        manager.load("buttons/levels/level-4.png", Texture.class);
+        manager.load("buttons/levels/level-5.png", Texture.class);
+        manager.load("buttons/levels/level-6.png", Texture.class);
+        manager.load("buttons/levels/level-7.png", Texture.class);
+        manager.load("buttons/levels/level-8.png", Texture.class);
 
         // Backgrounds
         manager.load("backgrounds/spaceBackground.png", Texture.class);
         manager.load("levelComplete.png", Texture.class);
+
         // Musics
         //
 

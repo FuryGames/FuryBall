@@ -27,7 +27,6 @@ public class GameScreen extends GenericScreen {
     private Box2DDebugRenderer debug;
     private OrthographicCamera camera;
     private World world;
-    private Array<Body> worldBodies;
     private Vector2 gravity;
     private ILevel currentLevel; // Nivel actual
     private Sprite background;
@@ -54,7 +53,6 @@ public class GameScreen extends GenericScreen {
         camera = new OrthographicCamera(WIDTH, HEIGHT);
         camera.position.set(WIDTH / 2f, HEIGHT / 2f, 0);
 
-        worldBodies = new Array<Body>();
         debug = new Box2DDebugRenderer();
 
         // En el caso que el nivel no haya sido asignado previamente
@@ -64,7 +62,8 @@ public class GameScreen extends GenericScreen {
         // Crear Limites (Test)
         Box2DCreator.createLimits(world);
 
-        BackgroundActor bgActor = new BackgroundActor(new Sprite(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class)));
+        BackgroundActor bgActor = new BackgroundActor(new Sprite(
+                FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class)));
         bgActor.setColor(1, 1, 1, 1);
         stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         stage.addActor(bgActor);

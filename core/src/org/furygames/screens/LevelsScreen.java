@@ -30,13 +30,21 @@ public class LevelsScreen extends GenericScreen {
         levelFigures = new LevelFigure[8];
 
         // Level1
-        levelFigures[0] = new LevelFigure(world, 1, WUNIT, HUNIT * 8, 1f);
+        levelFigures[0] = new LevelFigure(world, 1, WUNIT, HUNIT * 7, 1f);
         // Level2
-        levelFigures[1] = new LevelFigure(world, 2, (WUNIT * 3) + WUNIT / 2, HUNIT * 8, 1f);
+        levelFigures[1] = new LevelFigure(world, 2, (WUNIT * 3) + WUNIT / 2, HUNIT * 7, 1f);
         // Level3
-        levelFigures[2] = new LevelFigure(world, 3, (WUNIT * 7) - WUNIT / 2, HUNIT * 8, 1f);
+        levelFigures[2] = new LevelFigure(world, 3, (WUNIT * 7) - WUNIT / 2, HUNIT * 7, 1f);
         // Level4
-        levelFigures[3] = new LevelFigure(world, 4, WUNIT * 9, HUNIT * 8, 1f);
+        levelFigures[3] = new LevelFigure(world, 4, WUNIT * 9, HUNIT * 7, 1f);
+        // Level5
+        levelFigures[0] = new LevelFigure(world, 5, WUNIT, HUNIT * 3, 1f);
+        // Level6
+        levelFigures[1] = new LevelFigure(world, 6, (WUNIT * 3) + WUNIT / 2, HUNIT * 3, 1f);
+        // Level7
+        levelFigures[2] = new LevelFigure(world, 7, (WUNIT * 7) - WUNIT / 2, HUNIT * 3, 1f);
+        // Level8
+        levelFigures[3] = new LevelFigure(world, 8, WUNIT * 9, HUNIT * 3, 1f);
     }
 
     public void render(float delta) {

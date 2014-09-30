@@ -103,8 +103,8 @@ public class CreditsScreen extends GenericScreen {
 		camera.update();
 		debug.render(world, camera.combined);
 		
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
+//		batch.setProjectionMatrix(camera.combined);
+//		batch.begin();
 		
 		world.getBodies(worldBodies);
 		
@@ -124,11 +124,11 @@ public class CreditsScreen extends GenericScreen {
 				sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
 
 				/* Draw the sprite on screen */
-				sprite.draw(batch);
+//				sprite.draw(batch);
 			}
 		}
 		
-		batch.end();
+//		batch.end();
 		world.step(delta, 8, 6);
 	}
 

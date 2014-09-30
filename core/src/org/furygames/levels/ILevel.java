@@ -8,4 +8,6 @@ public interface ILevel {
     public void setCollidingPortal(boolean bool);
 
     public boolean isCollidingPortal();
+
+    public boolean isWin();
 }

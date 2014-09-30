@@ -9,12 +9,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
-import org.furygames.actors.BackgroundActor;
 import org.furygames.actors.Box2DCreator;
+import org.furygames.actors.LevelCompleteActor;
+import org.furygames.actors.WinMenuButton;
 import org.furygames.furyball.FuryBall;
 import org.furygames.inputs.GestureInput;
 import org.furygames.inputs.VirtualController;
@@ -30,7 +31,6 @@ public class GameScreen extends GenericScreen {
     private Array<Body> worldBodies;
     private Vector2 gravity;
     private ILevel currentLevel; // Nivel actual
-    private Sprite background;
 
     // Si el nivel esta cargado
     public static boolean isLoaded = false;
@@ -39,6 +39,8 @@ public class GameScreen extends GenericScreen {
     public static ELevels eLevels;
 
     public static Sound boing;
+
+    private Sprite background;
 
     public GameScreen() {
         FuryBall.assets.cargarAssets();
@@ -64,13 +66,19 @@ public class GameScreen extends GenericScreen {
         // Crear Limites (Test)
         Box2DCreator.createLimits(world);
 
-        BackgroundActor bgActor = new BackgroundActor(new Sprite(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class)));
-        bgActor.setColor(1, 1, 1, 1);
-        stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        stage.addActor(bgActor);
-
+        // Setear procesador de comandos a la aplicación
         Gdx.input.setInputProcessor(new GestureDetector(new GestureInput()));
 
+        prepareAudio();
+
+        background = new Sprite(FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class));
+        background.setSize(WIDTH, HEIGHT);
+
+        // en el futuro se puede crear un Dialog (Scene2D) y reutilizarlo para cada pantalla que lo necesite (ejemplos: juego Pocket Kingdom, o Bike Race)
+        prepareLevelCompleteStage();
+    }
+
+    private void prepareAudio() {
         Music music = FuryBall.assets.manager.get("sounds/music/prototipe.mp3", Music.class);
         music.play();
         music.setLooping(true);
@@ -78,16 +86,96 @@ public class GameScreen extends GenericScreen {
         boing = FuryBall.assets.manager.get("sounds/boing.mp3", Sound.class);
     }
 
+    private void prepareLevelCompleteStage() {
+        stage.addActor(new LevelCompleteActor());
+
+        //instantiate actors
+        WinMenuButton backButton = new WinMenuButton(currentLevel, WinMenuButton.Type.BACK);
+        WinMenuButton replayButton = new WinMenuButton(currentLevel, WinMenuButton.Type.REPLAY);
+        WinMenuButton nextButton = new WinMenuButton(currentLevel, WinMenuButton.Type.NEXT);
+
+        //set actors position
+        backButton.getSprite().setPosition(0, 0);
+        replayButton.getSprite().setPosition(WIDTH / 2 - replayButton.getSprite().getWidth() / 2, 0);
+        nextButton.getSprite().setPosition(WIDTH - replayButton.getSprite().getWidth(), 0);
+
+        //add click listeners
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ScreenManager.getInstance().show(EScreen.LEVELS);
+            }
+        });
+        replayButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                isLoaded = false;
+            }
+        });
+        nextButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                isLoaded = false;
+            }
+        });
+
+        stage.addActor(backButton);
+        stage.addActor(replayButton);
+        stage.addActor(nextButton);
+    }
+
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        inputGravity();
+        updateInput();
 
         camera.update();
 
         world.step(delta, 8, 3);
 
+        setScreen();
+
+        // Interacciones del nivel
+        if (currentLevel != null)
+            currentLevel.act();
+
+        // Eliminar nivel si lo necesita
+        if (needsToBeCleaned) {
+            currentLevel.destroyLevel();
+            needsToBeCleaned = false;
+        }
+
+        debug.render(world, camera.combined);
+
+        batch.setProjectionMatrix(camera.combined);
+
+        batch.begin();
+
+        background.draw(batch);
+
+        Box2DSprite.draw(batch, world);
+
+        if (currentLevel.isWin()) {
+            stage.draw();
+            stage.act();
+        }
+
+        batch.end();
+    }
+
+    private void updateInput() {
+        if (VirtualController.isForce()) {
+            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f),
+                    GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
+            world.setGravity(gravity);
+        } else if (VirtualController.isgNeutral()) {
+            gravity.set(0f, 0f);
+            world.setGravity(gravity);
+        }
+    }
+
+    private void setScreen() {
         if (!isLoaded) {
             switch (eLevels) {
                 case LEVEL1:
@@ -111,10 +199,14 @@ public class GameScreen extends GenericScreen {
                             }
 
 
-                            if (fixtureA.getUserData().equals("Portal"))
+                            if (fixtureA.getUserData().equals("Portal")) {
                                 currentLevel.setCollidingPortal(true);
-                            else if (fixtureB.getUserData().equals("Portal"))
+                                Gdx.input.setInputProcessor(stage);
+                            } else if (fixtureB.getUserData().equals("Portal")) {
                                 currentLevel.setCollidingPortal(true);
+                                Gdx.input.setInputProcessor(stage);
+                            }
+
                         }
 
                         @Override
@@ -149,12 +241,10 @@ public class GameScreen extends GenericScreen {
                                 return;
                             }
 
-
                             if (fixtureB.getUserData() == null) {
                                 boing.play();
                                 return;
                             }
-
 
                             if (fixtureA.getUserData().equals("Portal"))
                                 currentLevel.setCollidingPortal(true);
@@ -194,45 +284,6 @@ public class GameScreen extends GenericScreen {
             }
 
             isLoaded = true;
-        }
-
-        // Interacciones del nivel
-        if (currentLevel != null)
-            currentLevel.act();
-
-        // Eliminar nivel si lo necesita
-        if (needsToBeCleaned) {
-            currentLevel.destroyLevel();
-            needsToBeCleaned = false;
-        }
-
-        stage.draw();
-
-        debug.render(world, camera.combined);
-
-        batch.setProjectionMatrix(camera.combined);
-
-
-        batch.begin();
-
-        Box2DSprite.draw(batch, world);
-
-        /*
-        if (((Level3) currentLevel).isWin()) {
-            batch.draw(FuryBall.assets.manager.get("levelComplete.png", Texture.class), 100, 100, 100, 100);
-        }*/
-
-        batch.end();
-    }
-
-    private void inputGravity() {
-        if (VirtualController.isForce()) {
-            gravity.set(GRAVITY_FORCE * (VirtualController.getgForce().x * 0.5f),
-                    GRAVITY_FORCE * (VirtualController.getgForce().y * 0.5f));
-            world.setGravity(gravity);
-        } else if (VirtualController.isgNeutral()) {
-            gravity.set(0f, 0f);
-            world.setGravity(gravity);
         }
     }
 }

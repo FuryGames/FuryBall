@@ -43,6 +43,11 @@ public class LevelFigure extends GenericFigure {
                 break;
         }
 
+        super.setX(posX);
+        super.setY(posY);
+        super.setWidth(size);
+        super.setHeight(size);
+
         sprite.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 

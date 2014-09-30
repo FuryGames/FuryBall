@@ -89,7 +89,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 
 	@Override
 	public void show() {
-		world = new World(new Vector2(0,-1),true);
+		world = new World(new Vector2(0, -1), true);
 		debug = new Box2DDebugRenderer();
 		
 		camera = new OrthographicCamera(WIDTH, HEIGHT);
@@ -203,7 +203,7 @@ public class MenuScreen extends GenericScreen implements ContactListener {
         Sprite spStartButton = startButton.getSprite();
         Sprite spCreditsButton = creditsButton.getSprite();
         Sprite spExitButton = exitButton.getSprite();
-        
+
         if (touchPos.x > spStartButton.getX() 
         		&& touchPos.x < spStartButton.getX() + spStartButton.getWidth() 
         		&& touchPos.y > spStartButton.getY() 

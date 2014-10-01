@@ -1,8 +1,8 @@
 package org.furygames.screens;
 
-import com.badlogic.gdx.math.Vector3;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 import org.furygames.actors.LevelFigure;
+import org.furygames.levels.ELevels;
 import org.furygames.timer.ScreenSwitchTask;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -47,6 +47,10 @@ public class LevelsScreen extends GenericScreen {
         levelFigures[6] = new LevelFigure(world, 7, (WUNIT * 7) - WUNIT / 2, HUNIT * 3, 1f);
         // Level8
         levelFigures[7] = new LevelFigure(world, 8, WUNIT * 9, HUNIT * 3, 1f);
+
+        // Le asignamos camara a todos los LevelScreen, esto es para que funcione el touchDown
+        for (LevelFigure lf : levelFigures)
+            lf.setCamera(camera);
     }
 
     public void render(float delta) {
@@ -74,7 +78,7 @@ public class LevelsScreen extends GenericScreen {
                 || Gdx.input.isKeyJustPressed(Keys.BACK)) {
 			Timer.schedule(new ScreenSwitchTask(EScreen.MENU), 0f);
 		}
-        /*
+
         // Esto es solo por el momento
         if (Gdx.input.isKeyJustPressed(Keys.NUM_1)) {
             GameScreen.eLevels = ELevels.LEVEL1;
@@ -99,11 +103,11 @@ public class LevelsScreen extends GenericScreen {
         else if (Gdx.input.isKeyJustPressed(Keys.NUM_5)) {
             GameScreen.eLevels = ELevels.LEVEL5;
             Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 0f);
-        }*/
+        }
 
         // Touch levels input
         //
-
+        /*
         Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         camera.unproject(touchPos);
 
@@ -116,6 +120,6 @@ public class LevelsScreen extends GenericScreen {
 
                 System.out.println(i);
             }
-        }
+        }*/
 	}
 }

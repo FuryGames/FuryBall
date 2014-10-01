@@ -37,6 +37,7 @@ public class WinMenuButton extends Actor {
         }
 
         sprite.setSize(GenericScreen.WIDTH / 4.5f, GenericScreen.HEIGHT / 4.5f);
+        setSize(GenericScreen.WIDTH / 4.5f, GenericScreen.HEIGHT / 4.5f);
     }
 
     public Sprite getSprite() {

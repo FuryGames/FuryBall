@@ -113,12 +113,14 @@ public class GameScreen extends GenericScreen {
         replayButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                show();
                 isLoaded = false;
             }
         });
         nextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                show();
                 isLoaded = false;
             }
         });

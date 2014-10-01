@@ -96,14 +96,18 @@ public class GameScreen extends GenericScreen {
 
         //set actors position
         backButton.getSprite().setPosition(0, 0);
+        backButton.setPosition(0, 0);
         replayButton.getSprite().setPosition(WIDTH / 2 - replayButton.getSprite().getWidth() / 2, 0);
+        replayButton.setPosition(WIDTH / 2 - replayButton.getSprite().getWidth() / 2, 0);
         nextButton.getSprite().setPosition(WIDTH - replayButton.getSprite().getWidth(), 0);
+        nextButton.setPosition(WIDTH - replayButton.getSprite().getWidth(), 0);
 
         //add click listeners
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ScreenManager.getInstance().show(EScreen.LEVELS);
+                System.out.println("levelScreen");
             }
         });
         replayButton.addListener(new ClickListener() {

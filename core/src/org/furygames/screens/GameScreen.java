@@ -120,8 +120,10 @@ public class GameScreen extends GenericScreen {
         nextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                show();
+                needsToBeCleaned = true;
+                eLevels = eLevels.next();
                 isLoaded = false;
+                show();
             }
         });
 

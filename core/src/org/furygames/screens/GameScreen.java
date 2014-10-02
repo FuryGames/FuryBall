@@ -10,11 +10,8 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
-import org.furygames.actors.BackgroundActor;
 import org.furygames.actors.Box2DCreator;
 import org.furygames.actors.LevelCompleteActor;
 import org.furygames.actors.WinMenuButton;
@@ -65,12 +62,6 @@ public class GameScreen extends GenericScreen {
 
         // Crear Limites (Test)
         Box2DCreator.createLimits(world);
-
-        BackgroundActor bgActor = new BackgroundActor(new Sprite(
-                FuryBall.assets.manager.get("backgrounds/spaceBackground.png", Texture.class)));
-        bgActor.setColor(1, 1, 1, 1);
-        stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        stage.addActor(bgActor);
 
         // Setear procesador de comandos a la aplicación
         Gdx.input.setInputProcessor(new GestureDetector(new GestureInput()));

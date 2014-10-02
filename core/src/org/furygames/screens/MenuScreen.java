@@ -1,30 +1,19 @@
 package org.furygames.screens;
 
-import org.furygames.actors.Box2DCreator;
-import org.furygames.actors.CreditsButton;
-import org.furygames.actors.ExitButton;
-import org.furygames.actors.StartButton;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
-
+import org.furygames.actors.Box2DCreator;
+import org.furygames.actors.CreditsButton;
+import org.furygames.actors.ExitButton;
+import org.furygames.actors.StartButton;
 import org.furygames.timer.ScreenSwitchTask;
 
 public class MenuScreen extends GenericScreen implements ContactListener {
@@ -51,8 +40,8 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 		camera.update();
 		debug.render(world, camera.combined);
 		
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
+//		batch.setProjectionMatrix(camera.combined);
+//		batch.begin();
 		
 		world.getBodies(worldBodies);
 		
@@ -72,11 +61,11 @@ public class MenuScreen extends GenericScreen implements ContactListener {
 				sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
 
 				/* Draw the sprite on screen */
-				sprite.draw(batch);
+//				sprite.draw(batch);
 			}
 		}
 		
-		batch.end();
+//		batch.end();
 		world.step(1 / 60f, 8, 6);
 
 		buoyancyController.step();

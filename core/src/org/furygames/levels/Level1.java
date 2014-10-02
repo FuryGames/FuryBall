@@ -9,7 +9,7 @@ import org.furygames.screens.GenericScreen;
 public class Level1 extends GenericLevel {
 
     private Ball ball;
-    private Wall walls [];
+    private Wall walls[];
     private Portal portal;
     private boolean collidingPortal;
     private boolean win;
@@ -18,7 +18,7 @@ public class Level1 extends GenericLevel {
     public Level1(World world) {
         super(world);
 
-        walls = new Wall [5];
+        walls = new Wall[5];
 
         portal = new Portal(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 8 + .3f,
                 GenericScreen.HUNIT);
@@ -28,19 +28,19 @@ public class Level1 extends GenericLevel {
 
         // Centro
         walls[0] = new Wall(world, GenericScreen.WUNIT * 5, GenericScreen.HUNIT * 5,
-                GenericScreen.WUNIT / 3,  GenericScreen.HUNIT * 2);
+                GenericScreen.WUNIT / 3, GenericScreen.HUNIT * 2);
         // Arriba izquierda
         walls[1] = new Wall(world, GenericScreen.WUNIT * 3, GenericScreen.HUNIT * 7 - .35f,
-                GenericScreen.WUNIT * 1.655f,  GenericScreen.HUNIT / 2);
+                GenericScreen.WUNIT * 1.655f, GenericScreen.HUNIT / 2);
         // Arriba derecha
         walls[2] = new Wall(world, GenericScreen.WUNIT * 7, GenericScreen.HUNIT * 7 - .35f,
-                GenericScreen.WUNIT * 1.655f,  GenericScreen.HUNIT / 2);
+                GenericScreen.WUNIT * 1.655f, GenericScreen.HUNIT / 2);
         // Abajo derecha
         walls[3] = new Wall(world, GenericScreen.WUNIT * 1 + .2f, GenericScreen.HUNIT * 3,
-                GenericScreen.WUNIT,  GenericScreen.HUNIT / 2);
+                GenericScreen.WUNIT, GenericScreen.HUNIT / 2);
         // Abajo izquierda
         walls[4] = new Wall(world, GenericScreen.WUNIT * 9 - .2f, GenericScreen.HUNIT * 3,
-                GenericScreen.WUNIT,  GenericScreen.HUNIT / 2);
+                GenericScreen.WUNIT, GenericScreen.HUNIT / 2);
     }
 
     @Override
@@ -72,6 +72,11 @@ public class Level1 extends GenericLevel {
     @Override
     public boolean isCollidingPortal() {
         return collidingPortal;
+    }
+
+    @Override
+    public boolean isWin() {
+        return win;
     }
 
     public void setWin(boolean win) {

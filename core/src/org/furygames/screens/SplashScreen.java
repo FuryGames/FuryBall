@@ -4,10 +4,8 @@ package org.furygames.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import org.furygames.actors.BackgroundActor;
 import org.furygames.furyball.FuryBall;
 
@@ -26,16 +24,16 @@ public class SplashScreen extends GenericScreen {
         //bgActor.setCenterPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         bgActor.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        stage.addActor(bgActor);
+//        stage = new Stage(new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+//        stage.addActor(bgActor);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
 
-        stage.draw();
-        stage.act();
+//        stage.draw();
+//        stage.act();
     }
 
     @Override

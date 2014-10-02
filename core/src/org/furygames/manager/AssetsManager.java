@@ -29,8 +29,6 @@ public class AssetsManager {
         // Authors
         manager.load("actors/authors/enki.png", Texture.class);
         manager.load("actors/authors/writkas.png", Texture.class);
-        manager.load("actors/authors/jrf.png", Texture.class);
-        manager.load("actors/authors/guitauricio.png", Texture.class);
         manager.load("actors/authors/danirod.png", Texture.class);
         manager.load("actors/authors/seba.png", Texture.class);
         // Figures

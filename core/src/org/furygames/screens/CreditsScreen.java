@@ -66,17 +66,7 @@ public class CreditsScreen extends GenericScreen {
 				MathUtils.random(.5f, HEIGHT - .5f), 
 				world, 
 				MathUtils.random(1.5f, 3f),
-				EAuthors.JRF));
-		authors.add(new Author(MathUtils.random(.5f, WIDTH - .5f),
-				MathUtils.random(.5f, HEIGHT - .5f), 
-				world, 
-				MathUtils.random(1.5f, 3f),
 				EAuthors.ENKI));
-		authors.add(new Author(MathUtils.random(.5f, WIDTH - .5f),
-				MathUtils.random(.5f, HEIGHT - .5f), 
-				world, 
-				MathUtils.random(1.5f, 3f),
-				EAuthors.GUITAURICIO));
 		authors.add(new Author(MathUtils.random(.5f, WIDTH - .5f),
 				MathUtils.random(.5f, HEIGHT - .5f), 
 				world, 

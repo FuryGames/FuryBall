@@ -1,6 +1,5 @@
 package org.furygames.actors;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.physics.box2d.*;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 import org.furygames.screens.GenericScreen;
@@ -9,9 +8,7 @@ import org.furygames.screens.GenericScreen;
  * Created by writkas on 25/09/14.
  */
 public class LevelFigure extends GenericFigure {
-
     private PolygonShape rect;
-    private Camera camera = null;
 
     public LevelFigure (World world, int numLevel, float posX, float posY, float size) {
         super(world);
@@ -43,11 +40,6 @@ public class LevelFigure extends GenericFigure {
                 break;
         }
 
-        super.setX(posX);
-        super.setY(posY);
-        super.setWidth(size);
-        super.setHeight(size);
-
         sprite.setSize(GenericScreen.WUNIT, GenericScreen.HUNIT);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 
@@ -64,13 +56,5 @@ public class LevelFigure extends GenericFigure {
         body.getFixtureList().first().setUserData(numLevel);
 
         rect.dispose();
-    }
-
-    public Camera getCamera() {
-        return camera;
-    }
-
-    public void setCamera(Camera camera) {
-        this.camera = camera;
     }
 }

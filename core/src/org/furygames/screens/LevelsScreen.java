@@ -51,10 +51,6 @@ public class LevelsScreen extends GenericScreen {
         // Level8
         levelFigures[7] = new LevelFigure(world, 8, WUNIT * 9, HUNIT * 3, 1f);
 
-        // Le asignamos camara a todos los LevelScreen, esto es para que funcione el touchDown
-        for (LevelFigure lf : levelFigures)
-            lf.setCamera(camera);
-
         // Input
         inputLevelScreen = new InputLevelScreen(world, camera);
         Gdx.input.setInputProcessor(inputLevelScreen);

@@ -1,7 +1,9 @@
 package org.furygames.screens;
 
+import com.badlogic.gdx.InputMultiplexer;
 import net.dermetfan.utils.libgdx.graphics.Box2DSprite;
 import org.furygames.actors.LevelFigure;
+import org.furygames.inputs.InputLevelScreen;
 import org.furygames.levels.ELevels;
 import org.furygames.timer.ScreenSwitchTask;
 
@@ -20,6 +22,7 @@ public class LevelsScreen extends GenericScreen {
     private World world;
     private Box2DDebugRenderer debug;
     private LevelFigure [] levelFigures;
+    private InputLevelScreen inputLevelScreen;
 
     public void show() {
         super.show();
@@ -51,6 +54,10 @@ public class LevelsScreen extends GenericScreen {
         // Le asignamos camara a todos los LevelScreen, esto es para que funcione el touchDown
         for (LevelFigure lf : levelFigures)
             lf.setCamera(camera);
+
+        // Input
+        inputLevelScreen = new InputLevelScreen(world, camera);
+        Gdx.input.setInputProcessor(inputLevelScreen);
     }
 
     public void render(float delta) {
@@ -104,22 +111,5 @@ public class LevelsScreen extends GenericScreen {
             GameScreen.eLevels = ELevels.LEVEL5;
             Timer.schedule(new ScreenSwitchTask(EScreen.GAME), 0f);
         }
-
-        // Touch levels input
-        //
-        /*
-        Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-        camera.unproject(touchPos);
-
-        for (int i = 0; i < NUM_LEVELS; i++) {
-            if (touchPos.x > levelFigures[i].getX()
-                    && touchPos.x < levelFigures[i].getX() + levelFigures[i].getWidth()
-                    && touchPos.y > levelFigures[i].getY()
-                    && touchPos.y < levelFigures[i].getY() + levelFigures[i].getHeight()
-                    && Gdx.input.justTouched()) {
-
-                System.out.println(i);
-            }
-        }*/
 	}
 }

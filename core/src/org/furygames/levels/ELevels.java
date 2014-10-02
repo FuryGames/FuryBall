@@ -1,7 +1,9 @@
 package org.furygames.levels;
 
 public enum ELevels {
-	LEVEL6 (null),
+    LEVEL8 (null),
+    LEVEL7 (LEVEL8),
+	LEVEL6 (LEVEL7),
 	LEVEL5 (LEVEL6),
 	LEVEL4 (LEVEL5),
 	LEVEL3 (LEVEL4), 
@@ -15,6 +17,6 @@ public enum ELevels {
 	}
 	
 	public ELevels next () {
-		return next == null ? LEVEL6 : next;
+		return next == null ? LEVEL8 : next;
 	}
 }
